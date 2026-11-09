@@ -1,0 +1,13 @@
+# Local Agent & Tooling Configurations
+.agents/
+.gemini/
+
+# Environment Variables & Private Secrets
+.env
+.env.*
+!.env.example
+
+# Operating System & Cache
+.DS_Store
+Thumbs.db
+*.log
