@@ -81,7 +81,7 @@ To prevent documentation drift, any pull request containing the following change
 | :--- | :--- |
 | Database schema change, new table, or migration | [`ARCHITECTURE.md`](ARCHITECTURE.md) (Update ER diagram and schema section) |
 | New API endpoint, webhook handler, or external gateway | [`ARCHITECTURE.md`](ARCHITECTURE.md) & [`SECURITY.md`](SECURITY.md) |
-| New UI component, color token, or layout pattern | [`DESIGN_GUIDELINES.md`](DESIGN_GUIDELINES.md) |
+| New UI component, color token, or layout pattern | [`DESIGN_GUIDELINES.md`](DESIGN_GUIDELINES.md) (Update the Mermaid swatch board, hex/role table, and accessibility notes) |
 | New environment variable or third-party dependency | [`DEVELOPMENT_WORKFLOW.md`](DEVELOPMENT_WORKFLOW.md) (Update `.env` reference) |
 | New feature, module scope, or user workflow | [`PRD.md`](PRD.md) |
 | Significant technical decision, framework choice, or pivot | [`DECISIONS.md`](DECISIONS.md) (Record new `DEC-XXX` entry) |
