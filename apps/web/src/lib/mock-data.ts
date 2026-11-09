@@ -1,4 +1,5 @@
 import type {
+  ConversationMessage,
   HandoverDispatch,
   KpiMetric,
   Lead,
@@ -502,6 +503,116 @@ export const leads: Lead[] = [
     updatedAt: "2026-11-06T11:30:00+05:30",
   },
 ];
+
+export const conversationMessages: ConversationMessage[] = [
+  {
+    id: "msg-001",
+    leadId: "lead-001",
+    direction: "INBOUND",
+    body: "Namaste, mare SIP shuru karvu che. Gujarati ma callback joie che.",
+    language: "GUJARATI",
+    sentAt: "2026-11-08T18:20:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-002",
+    leadId: "lead-001",
+    direction: "OUTBOUND",
+    body: "Hello Rameshbhai! I've noted your SIP enquiry. Our advisor Kaushik Raval will call you in Gujarati today.",
+    language: "ENGLISH",
+    sentAt: "2026-11-08T18:25:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-003",
+    leadId: "lead-001",
+    direction: "INBOUND",
+    body: "Thank you. Monthly SIP ₹10,000 for 5-10 years. Risk comfort moderate.",
+    language: "ENGLISH",
+    sentAt: "2026-11-08T18:45:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-004",
+    leadId: "lead-001",
+    direction: "OUTBOUND",
+    body: "Perfect. KYC is completed. I've scheduled a callback for today at 4:00 PM. Is that convenient?",
+    language: "ENGLISH",
+    sentAt: "2026-11-09T10:20:00+05:30",
+    deliveryStatus: "DELIVERED",
+  },
+  {
+    id: "msg-005",
+    leadId: "lead-002",
+    direction: "INBOUND",
+    body: "Namaste, mare salary ITR file karvano che. AY 2026-27 ma.",
+    language: "GUJARATI",
+    sentAt: "2026-11-09T10:04:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-006",
+    leadId: "lead-002",
+    direction: "OUTBOUND",
+    body: "Hello Priyaben! I can help with your salary-only ITR for AY 2026-27. The package is ₹1,200. Do you have Form 16 ready?",
+    language: "ENGLISH",
+    sentAt: "2026-11-09T10:08:00+05:30",
+    deliveryStatus: "SENT",
+  },
+  {
+    id: "msg-007",
+    leadId: "lead-003",
+    direction: "INBOUND",
+    body: "Mere health insurance claim reject kar diya gaya hai. 21 din se reimbursement pending hai. Kaushik ji se baat karni hai.",
+    language: "HINDI",
+    sentAt: "2026-11-09T09:12:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-008",
+    leadId: "lead-003",
+    direction: "OUTBOUND",
+    body: "Namaste Amit ji. I understand your frustration. I've escalated this to Kaushik Raval directly. He will call you at 2:00 PM today regarding your hospital reimbursement.",
+    language: "HINDI",
+    sentAt: "2026-11-09T09:15:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-009",
+    leadId: "lead-014",
+    direction: "INBOUND",
+    body: "Hello, my health claim reimbursement has been pending for 21 days. Can you help?",
+    language: "ENGLISH",
+    sentAt: "2026-11-09T09:50:00+05:30",
+    deliveryStatus: "READ",
+  },
+  {
+    id: "msg-010",
+    leadId: "lead-014",
+    direction: "OUTBOUND",
+    body: "Hello Kavitaben. I'm sorry for the delay. This has been escalated as HIGH priority. Kaushik will personally review your case at 12:00 PM today.",
+    language: "ENGLISH",
+    sentAt: "2026-11-09T09:55:00+05:30",
+    deliveryStatus: "READ",
+  },
+];
+
+export function getMessagesForLead(leadId: string): ConversationMessage[] {
+  return [...conversationMessages]
+    .filter((msg) => msg.leadId === leadId)
+    .sort(
+      (a, b) => new Date(a.sentAt).getTime() - new Date(b.sentAt).getTime(),
+    );
+}
+
+export function getUnreadCount(leadId: string): number {
+  return conversationMessages.filter(
+    (msg) =>
+      msg.leadId === leadId &&
+      msg.direction === "INBOUND" &&
+      msg.deliveryStatus !== "READ",
+  ).length;
+}
 
 export const handoverDispatches: HandoverDispatch[] = [
   {

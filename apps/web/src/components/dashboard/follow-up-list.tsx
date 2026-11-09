@@ -26,7 +26,9 @@ export function FollowUpList({ items }: FollowUpListProps) {
               <p
                 className={cn(
                   "font-mono text-[11px] font-medium tabular-nums",
-                  item.urgent ? "text-[var(--state-degradation-fg)]" : "text-white",
+                  item.urgent
+                    ? "text-[var(--state-degradation-fg)]"
+                    : "text-white",
                 )}
               >
                 {timeLabel}
