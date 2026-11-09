@@ -86,7 +86,9 @@ export function KpiCard({
           <span
             className={cn(
               "grid size-9 shrink-0 place-items-center rounded-xl",
-              inverted ? "bg-[var(--state-neutral-inverted-bg)] text-[var(--state-neutral-inverted-fg)]" : toneStyles.icon,
+              inverted
+                ? "bg-[var(--state-neutral-inverted-bg)] text-[var(--state-neutral-inverted-fg)]"
+                : toneStyles.icon,
             )}
           >
             <Icon aria-hidden="true" className="size-4" strokeWidth={2} />

@@ -14,8 +14,8 @@ function Table({
     <div
       data-slot="table-container"
       className={cn(
-        "relative w-full overflow-x-auto scrollable-area",
-        containerProps?.className
+        "scrollable-area relative w-full overflow-x-auto",
+        containerProps?.className,
       )}
       {...containerProps}
     >
