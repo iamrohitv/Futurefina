@@ -1,0 +1,325 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans:
+    var(--font-inter), var(--font-noto-gujarati), var(--font-noto-devanagari),
+    ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading:
+    var(--font-inter), var(--font-noto-gujarati), var(--font-noto-devanagari),
+    ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  /* Obsidian-Mint semantic aliases */
+  --color-canvas: var(--surface-canvas);
+  --color-surface: var(--surface-card);
+  --color-pill: var(--surface-pill-muted);
+  --color-hairline: var(--border-subtle);
+  --color-mint: var(--accent-mint);
+  --color-mint-hover: var(--accent-mint-hover);
+  --color-mint-subtle: var(--accent-mint-subtle);
+  --color-inverted: var(--surface-inverted);
+  --color-blue: var(--accent-blue);
+  --color-coral: var(--accent-coral);
+  --color-peach: var(--accent-peach);
+  --color-purple: var(--accent-purple);
+  --color-amber: var(--accent-amber);
+  --color-chart-track: var(--chart-track);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  /* shadcn/ui token bridge */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* 4px grid, 16px cards, full pills */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 9999px;
+
+  /* Custom easing curves (emil-design-eng: never use built-in easings for UI) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Approved Obsidian-Mint palette */
+  --surface-canvas: #212227;
+  --surface-card: #2a2d34;
+  --surface-pill-muted: #343842;
+  --surface-hatch-pattern: #353942;
+  --border-subtle: #32353e;
+  --accent-mint: #13ad87;
+  --accent-mint-hover: #109b78;
+  --accent-mint-subtle: #11382e;
+  --surface-inverted: #ffffff;
+  --btn-primary-bg: #ffffff;
+  --btn-primary-fg: #1a1d24;
+  --tooltip-badge-bg: #ffffff;
+  --accent-blue: #156df5;
+  --accent-coral: #fc5c46;
+  --accent-peach: #fa7d52;
+  --accent-purple: #8b5cf6;
+  --accent-amber: #fbbf24;
+  --chart-track: #737a88;
+
+  /* Text ramp — AA verified against canvas and card surfaces */
+  --text-primary: #ffffff;
+  --text-secondary: #a7adbb;
+  --text-tertiary: #969aa8;
+
+  /* Semantic state colors (replaces hardcoded hex in components) */
+  --state-improvement-bg: var(--accent-mint-subtle);
+  --state-improvement-fg: var(--accent-mint);
+  --state-degradation-bg: #451a1a;
+  --state-degradation-fg: var(--destructive);
+  --state-improvement-inverted-bg: color-mix(
+    in srgb,
+    var(--accent-mint) 18%,
+    transparent
+  );
+  --state-improvement-inverted-fg: #065f46;
+  --state-degradation-inverted-bg: color-mix(
+    in srgb,
+    var(--destructive) 15%,
+    transparent
+  );
+  --state-degradation-inverted-fg: #b42318;
+  --state-neutral-inverted-bg: #f2f4f7;
+  --state-neutral-inverted-fg: #1a1d24;
+
+  /* shadcn/ui tokens */
+  --background: var(--surface-canvas);
+  --foreground: var(--text-primary);
+  --card: var(--surface-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface-card);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent-mint);
+  --primary-foreground: #08120f;
+  --secondary: var(--surface-pill-muted);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--surface-pill-muted);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--accent-mint-subtle);
+  --accent-foreground: var(--accent-mint);
+  --destructive: #f87171;
+  --border: var(--border-subtle);
+  --input: #3a3e48;
+  --ring: var(--accent-mint);
+  --chart-1: var(--accent-mint);
+  --chart-2: var(--accent-blue);
+  --chart-3: var(--accent-coral);
+  --chart-4: var(--accent-peach);
+  --chart-5: var(--accent-purple);
+  --radius: 0.75rem;
+  --sidebar: var(--surface-canvas);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--accent-mint);
+  --sidebar-primary-foreground: #08120f;
+  --sidebar-accent: var(--accent-mint-subtle);
+  --sidebar-accent-foreground: var(--accent-mint);
+  --sidebar-border: var(--border-subtle);
+  --sidebar-ring: var(--accent-mint);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings:
+      "cv02" 1,
+      "cv03" 1,
+      "cv04" 1;
+  }
+
+  ::selection {
+    background: var(--accent-mint);
+    color: #08120f;
+  }
+
+  [lang="gu"],
+  [lang="hi"] {
+    line-height: 1.6;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Lead lifecycle pills — exact tokens from DESIGN_GUIDELINES.md section 2.3.
+   Closed uses #9CA3AF for 6.28:1 contrast (the documented #6B7280 is 3.3:1). */
+[data-lead-status="NEW"] {
+  background-color: #343842;
+  color: #ffffff;
+}
+[data-lead-status="QUALIFICATION_IN_PROGRESS"] {
+  background-color: #2c3342;
+  color: #60a5fa;
+}
+[data-lead-status="QUALIFIED"] {
+  background-color: #11382e;
+  color: #13ad87;
+}
+[data-lead-status="ASSIGNED"] {
+  background-color: #243348;
+  color: #38bdf8;
+}
+[data-lead-status="CONTACT_ATTEMPTED"] {
+  background-color: #3b3322;
+  color: #fbbf24;
+}
+[data-lead-status="FOLLOW_UP_REQUIRED"] {
+  background-color: #422d1e;
+  color: #fb923c;
+}
+[data-lead-status="CONVERTED"] {
+  background-color: #0d3822;
+  color: #34d399;
+}
+[data-lead-status="NOT_INTERESTED"] {
+  background-color: #2b2d34;
+  color: #9ca3af;
+}
+[data-lead-status="CLOSED"] {
+  background-color: #1f2228;
+  color: #9ca3af;
+}
+[data-lead-status="ESCALATED_COMPLAINT"] {
+  background-color: #451a1a;
+  color: #f87171;
+}
+
+@utility bg-hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--surface-hatch-pattern) 0,
+    var(--surface-hatch-pattern) 2px,
+    transparent 2px,
+    transparent 7px
+  );
+}
+
+@utility bg-hatch-mint {
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--accent-mint) 55%, transparent) 0,
+    color-mix(in srgb, var(--accent-mint) 55%, transparent) 2px,
+    transparent 2px,
+    transparent 7px
+  );
+}
+
+@utility scrollbar-slim {
+  scrollbar-width: thin;
+  scrollbar-color: #3f4450 transparent;
+}
+
+/* Premium Obsidian-Mint custom scrollbar (WebKit: Chrome, Edge, Safari).
+   Adapted from hexlab's clean scrollbar pattern, re-themed to Obsidian-Mint.
+   Thin, low-contrast track with a mint thumb that surfaces on hover. */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3f4450;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #13ad87;
+}
+
+/* Subtle track on scrollable containers so the thumb has contrast. */
+.scrollable-area {
+  scrollbar-color: #3f4450 transparent;
+}
+
+.scrollable-area::-webkit-scrollbar-track {
+  background: #2a2d34;
+  border-radius: 9999px;
+}
+
+.scrollable-area::-webkit-scrollbar-thumb {
+  background-color: #3f4450;
+}
+
+.scrollable-area::-webkit-scrollbar-thumb:hover {
+  background-color: #13ad87;
+}
+
+/* Firefox scrollbar color shim. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3f4450 transparent;
+}

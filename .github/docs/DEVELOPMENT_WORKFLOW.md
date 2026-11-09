@@ -12,7 +12,7 @@ Before setting up the project locally, verify that your development environment 
 | Tool | Minimum Version | Recommended Installation | Purpose |
 | :--- | :--- | :--- | :--- |
 | **Node.js** | `>= 20.x LTS` | `nvm` or `fnm` | Runtime for frontend and backend tooling. |
-| **Package Manager** | `pnpm >= 9.x` (or `npm >= 10.x`) | `corepack enable pnpm` | Fast, deterministic dependency management. |
+| **Package Manager** | `npm >= 10.x` (active) or `pnpm >= 9.x` | Bundled with Node.js / `corepack enable pnpm` | Fast, deterministic dependency management. This repository commits `package-lock.json` for npm. |
 | **Docker Engine & Compose** | `>= 24.x` | Docker Desktop / OrbStack | Local PostgreSQL, Redis, and MinIO services. |
 | **Git** | `>= 2.40` | Official Git package | Version control. |
 | **Tunneling Tool** | Latest | `ngrok` or `cloudflared` | Exposing local webhook endpoint to Meta Graph API. |
@@ -30,36 +30,46 @@ cd Futurefina
 ```
 
 ### Step 2: Environment Configuration
-Copy the template configuration file:
+Phases 1–4 (the UI delivered with typed fixtures) require **no environment variables**. The backend configuration template is introduced with Phase 5:
 ```bash
+# Phase 5 only
 cp .env.example .env.local
 ```
 > [!CAUTION]
 > Never commit `.env.local` or any file containing real Meta API secrets or private tokens. See [`SECURITY.md`](SECURITY.md).
 
-### Step 3: Launch Local Backing Services (Docker)
-Start PostgreSQL and Redis in the background:
+### Step 3: Launch Local Backing Services (Docker — Phase 5)
+Phase 1 does not require PostgreSQL or Redis. From Phase 5 onward, start them in the background:
 ```bash
 docker compose up -d postgres redis
 ```
 
-### Step 4: Install Dependencies & Run Database Migrations
+### Step 4: Install Dependencies
 ```bash
-# Install dependencies
-pnpm install
+# Install all workspace dependencies from the repository root
+npm install
 
-# Run database schema migrations
-pnpm db:migrate
+# Run database schema migrations (Phase 5)
+npm run db:migrate
 
-# Seed database with development accounts and pipeline stages
-pnpm db:seed
+# Seed development accounts and pipeline stages (Phase 5)
+npm run db:seed
 ```
 
 ### Step 5: Start Development Server
 ```bash
-pnpm dev
+npm run dev
 ```
 The CRM client will be available at `http://localhost:3000` (or the configured application port).
+
+### Step 6: Run the Pre-Commit Quality Gate
+```bash
+npm run lint
+npm run typecheck
+npm run test
+npm run build
+```
+For visual and accessibility verification, run `npm run test:e2e` with Chrome installed (Playwright uses the system Chrome channel).
 
 ---
 
@@ -187,17 +197,17 @@ All development work proceeds through a structured, quality-controlled lifecycle
 
 ### 7.2 Running Tests
 ```bash
-# Run all unit and integration tests
-pnpm test
+# Run all unit and component tests
+npm run test
 
 # Run tests in watch mode during development
-pnpm test:watch
+npm run test:watch
 
 # Generate code coverage report
-pnpm test:coverage
+npm run test:coverage
 
-# Run end-to-end test suite
-pnpm test:e2e
+# Run end-to-end and accessibility tests
+npm run test:e2e
 ```
 
 ### 7.3 Webhook Ingestion Test Suite

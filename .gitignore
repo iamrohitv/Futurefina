@@ -7,6 +7,19 @@
 .env.*
 !.env.example
 
+# Dependencies & Build Output
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Testing & Visual Audit
+test-results/
+playwright-report/
+blob-report/
+
 # Operating System & Cache
 .DS_Store
 Thumbs.db

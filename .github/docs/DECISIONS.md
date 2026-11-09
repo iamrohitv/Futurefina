@@ -20,13 +20,14 @@
 | :--- | :--- | :--- | :--- | :--- |
 | [DEC-001](#dec-001-centralized-documentation-system-structure-in-github) | Centralized Documentation System Structure in `.github/` | 2026-11-09 | Proposed | Architecture |
 | [DEC-002](#dec-002-conventional-commits-and-ai-git-governance-policy) | Conventional Commits & AI Agent Git Governance Policy | 2026-11-09 | Proposed | Development |
-| [DEC-003](#dec-003-core-architecture--technology-stack-selection-criteria) | Core Architecture & Technology Stack Selection Criteria | 2026-11-09 | Proposed | Technology |
+| [DEC-003](#dec-003-core-architecture--technology-stack-selection-criteria) | Core Architecture & Technology Stack Selection Criteria | 2026-11-09 | Accepted | Technology |
 | [DEC-004](#dec-004-asynchronous-webhook-ingestion--idempotent-processing-model) | Asynchronous Webhook Ingestion & Idempotent Processing Model | 2026-11-09 | Proposed | Architecture |
 | [DEC-005](#dec-005-direct-meta-whatsapp-cloud-api-integration-approach) | Direct Meta WhatsApp Cloud API Integration Approach | 2026-11-09 | Proposed | Integration |
 | [DEC-006](#dec-006-adoption-of-obsidian-mint-ui-color-system-and-token-architecture) | Adoption of Obsidian-Mint UI Color System and Token Architecture | 2026-11-09 | Accepted | UI-UX |
 | [DEC-007](#dec-007-dual-engine-conversation-architecture-deterministic-flow--grounded-llm) | Dual-Engine Conversation Architecture (Deterministic Flow + Grounded LLM) | 2026-11-09 | Accepted | Architecture |
 | [DEC-008](#dec-008-multilingual-tri-language-strategy-gujarati-hindi-english) | Multilingual Tri-Language Strategy (Gujarati, Hindi, English) | 2026-11-09 | Accepted | Product |
 | [DEC-009](#dec-009-strict-financial-compliance-data-minimization-and-prohibited-credentials) | Strict Financial Compliance, Data Minimization & Prohibited Credentials | 2026-11-09 | Accepted | Security |
+| [DEC-010](#dec-010-monorepo-workspace-layout-and-mock-first-ui-delivery) | Monorepo Workspace Layout & Mock-First UI Delivery | 2026-11-09 | Accepted | Architecture |
 
 ---
 
@@ -47,6 +48,8 @@ Organize the entire repository documentation under a single dedicated `.github/`
 - Entry point: `.github/README.md`
 - Detailed specifications: `.github/docs/*.md`
 - Exclude root-level README files, YAML workflow automations, and unapproved markdown documents.
+
+Root-level files are limited to implementation/workspace configuration (for example `package.json`, `package-lock.json`, `tsconfig` files). Agent tooling may live in `.opencode/` (project skills) and is not part of the product documentation set.
 
 ### 4. Alternatives Considered
 - *Root-Level Documentation Folder (`/docs`)*: Pollutes repository root alongside source directories (`/src`, `/public`).
@@ -107,7 +110,7 @@ A strict permission gate protects the integrity of the codebase and ensures that
 ## DEC-003: Core Architecture & Technology Stack Selection Criteria
 
 - **Date**: 2026-11-09
-- **Status**: Proposed
+- **Status**: Accepted
 - **Category**: Technology
 
 ### 1. Context
@@ -117,12 +120,15 @@ The WhatsApp CRM requires a high-performance web frontend for conversational mes
 We must establish an initial technical baseline for the frontend, backend, database, and queuing layers without prematurely locking in unconfirmed client preferences.
 
 ### 3. Decision
-Propose a modern, type-safe full-stack TypeScript ecosystem marked as `[PROPOSED - PENDING CONFIRMATION]`:
-- **Frontend**: Next.js (React 19, TypeScript, Tailwind CSS, shadcn/ui).
+Adopt a modern, type-safe full-stack TypeScript ecosystem:
+- **Frontend**: Next.js 16 (App Router; React 19, TypeScript strict, Tailwind CSS v4, shadcn/ui on Radix primitives).
 - **Backend**: Node.js (TypeScript) API with WebSocket / SSE support.
 - **Database**: PostgreSQL (v15+) with Prisma or Drizzle ORM.
 - **Queue & Pub/Sub**: Redis with BullMQ for asynchronous background job execution.
 - **Storage**: S3-compatible object storage (AWS S3, MinIO, or Cloudflare R2).
+- **Package Manager**: npm >= 10 with a committed `package-lock.json` (pnpm remains supported by the workflow docs but is not required).
+
+**Implementation baseline (2026-11-09)**: Next.js 16.4.5, React 19.3.0, TypeScript 5.x strict, Tailwind CSS 4.3.5, and shadcn/ui 4.23.0 were verified in `apps/web`. Phase 1 is frontend-only with typed fixtures; backend, database, queue, and storage layers land in Phase 5.
 
 ### 4. Alternatives Considered
 - *Python / FastAPI + PostgreSQL*: Excellent for data pipelines and AI, but lacks end-to-end type sharing between React frontend and backend models.
@@ -344,3 +350,44 @@ Data minimization and proactive security controls protect both the customer and 
 ### 7. Related References
 - [Security (Section 1 & 3)](SECURITY.md)
 - [PRD (Section 1 & 9)](PRD.md)
+
+---
+
+## DEC-010: Monorepo Workspace Layout and Mock-First UI Delivery
+
+- **Date**: 2026-11-09
+- **Status**: Accepted
+- **Category**: Architecture
+
+### 1. Context
+The platform requires a high-density Next.js advisor console now, plus a Node.js API and PostgreSQL database in Phase 5. The UI must be built and reviewed independently of backend availability, without creating a second restructuring project later.
+
+### 2. Problem
+A single-package Next.js application would place server code, shared domain types, and the dashboard in one dependency graph. Mock data embedded directly inside page components would then be difficult to replace safely and could leak into production paths.
+
+### 3. Decision
+1. **Workspace layout**: Use npm workspaces with:
+   - `apps/web` — Next.js App Router console (Phases 1–4).
+   - `apps/api` — Node.js/Express API (Phase 5).
+   - `packages/shared` — framework-agnostic domain types, constants, and labels.
+2. **Mock-first UI delivery**: Phases 1–4 read typed fixtures from `apps/web/src/lib/mock-data.ts`. Fixtures never enter `packages/shared`; Phase 5 replaces the module with API-backed repository functions behind the same types.
+3. **Package manager**: npm >= 10 with a committed `package-lock.json`. pnpm remains an acceptable alternative if a contributor installs it, but is not required.
+4. **Tooling**: TypeScript strict, ESLint, Prettier, Vitest for unit/component tests, and Playwright with axe for WCAG 2.2 AA checks.
+
+### 4. Alternatives Considered
+- *Single Next.js app*: Faster to scaffold, but mixes API/server concerns with the dashboard and requires a later move.
+- *Backend-first delivery*: Derives UI from an unfinished API, slowing visual review and blocking Phases 1–4 on database provisioning.
+- *Mock data in `packages/shared`*: Couples fixtures to the domain package and risks shipping test data with production types.
+
+### 5. Reasoning
+A workspace boundary keeps the shared domain contract stable while allowing the UI and API to evolve independently. A single typed mock module gives deterministic UI tests and a mechanical replacement point for Phase 5.
+
+### 6. Consequences
+- **Positive**: No later directory migration; type sharing from database to UI; fast, deterministic UI phases; clean mock-to-API swap.
+- **Negative / Trade-offs**: Workspace tooling adds root scripts and dependency hoisting; contributors must run commands from the repository root.
+
+### 7. Related References
+- [Architecture (Section 5)](ARCHITECTURE.md)
+- [Development Workflow (Section 2)](DEVELOPMENT_WORKFLOW.md)
+- [DEC-003](#dec-003-core-architecture--technology-stack-selection-criteria)
+
