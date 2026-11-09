@@ -19,14 +19,14 @@
 | ID | Title | Date | Status | Category |
 | :--- | :--- | :--- | :--- | :--- |
 | [DEC-001](#dec-001-centralized-documentation-system-structure-in-github) | Centralized Documentation System Structure in `.github/` | 2026-11-09 | Proposed | Architecture |
-| [DEC-002](#dec-002-conventional-commits--ai-git-governance-policy) | Conventional Commits & AI Agent Git Governance Policy | 2026-11-09 | Proposed | Development |
+| [DEC-002](#dec-002-conventional-commits-and-ai-git-governance-policy) | Conventional Commits & AI Agent Git Governance Policy | 2026-11-09 | Proposed | Development |
 | [DEC-003](#dec-003-core-architecture--technology-stack-selection-criteria) | Core Architecture & Technology Stack Selection Criteria | 2026-11-09 | Proposed | Technology |
 | [DEC-004](#dec-004-asynchronous-webhook-ingestion--idempotent-processing-model) | Asynchronous Webhook Ingestion & Idempotent Processing Model | 2026-11-09 | Proposed | Architecture |
 | [DEC-005](#dec-005-direct-meta-whatsapp-cloud-api-integration-approach) | Direct Meta WhatsApp Cloud API Integration Approach | 2026-11-09 | Proposed | Integration |
 | [DEC-006](#dec-006-adoption-of-obsidian-mint-ui-color-system-and-token-architecture) | Adoption of Obsidian-Mint UI Color System and Token Architecture | 2026-11-09 | Accepted | UI-UX |
 | [DEC-007](#dec-007-dual-engine-conversation-architecture-deterministic-flow--grounded-llm) | Dual-Engine Conversation Architecture (Deterministic Flow + Grounded LLM) | 2026-11-09 | Accepted | Architecture |
 | [DEC-008](#dec-008-multilingual-tri-language-strategy-gujarati-hindi-english) | Multilingual Tri-Language Strategy (Gujarati, Hindi, English) | 2026-11-09 | Accepted | Product |
-| [DEC-009](#dec-009-strict-financial-compliance-data-minimization--prohibited-credentials) | Strict Financial Compliance, Data Minimization & Prohibited Credentials | 2026-11-09 | Accepted | Security |
+| [DEC-009](#dec-009-strict-financial-compliance-data-minimization-and-prohibited-credentials) | Strict Financial Compliance, Data Minimization & Prohibited Credentials | 2026-11-09 | Accepted | Security |
 
 ---
 
@@ -227,20 +227,6 @@ Adopt the **Obsidian Slate and Electric Mint** color system with the following t
 4. **Categorical Data Accents**: Multi-hue palette for charts and stages: Cobalt Blue (`#156DF5`), Coral Red (`#FC5C46`), Warm Peach (`#FA7D52`), and Purple (`#8B5CF6`).
 5. **Patterned Fills**: 45-degree diagonal hatched gray (`#353942`) for projected/inactive chart bars.
 
-**Visual reference** — swatches use the decision's exact palette values; the `#808080` frame is documentation-only and is not a product token:
-
-```mermaid
-flowchart LR
-    P1["Deep Slate"] ~~~ P2["Obsidian Slate"] ~~~ P3["Electric Mint"] ~~~ P4["Pure White"] ~~~ P5["Cobalt Blue"] ~~~ P6["Coral Red"]
-
-    style P1 fill:#212227,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P2 fill:#2A2D34,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P3 fill:#13AD87,stroke:#808080,stroke-width:2px,color:#1A1D24
-    style P4 fill:#FFFFFF,stroke:#808080,stroke-width:2px,color:#1A1D24
-    style P5 fill:#156DF5,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P6 fill:#FC5C46,stroke:#808080,stroke-width:2px,color:#1A1D24
-```
-
 ### 4. Alternatives Considered
 - *Default WhatsApp Bright Green (`#25D366`)*: Retained as optional brand indicator, but the deeper, refined Electric Mint (`#13AD87`) provides superior contrast and modern enterprise dashboard aesthetics.
 - *Monochrome Grayscale*: Lacks clear visual distinction for multi-ring charts, SLA warnings, and deal stage progressions.
@@ -254,7 +240,6 @@ The combination of `#212227` and `#2A2D34` provides a low-contrast, low-fatigue 
 
 ### 7. Related References
 - [Design Guidelines (Section 2)](DESIGN_GUIDELINES.md)
-- [Rendered Palette Swatch Boards](DESIGN_GUIDELINES.md#2-color-system--design-tokens-obsidian-mint-palette)
 - [PRD (Section 5 - Features)](PRD.md)
 
 ---

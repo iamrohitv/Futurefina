@@ -18,21 +18,7 @@ Welcome to the central documentation repository for **Futurefina Consultancy** (
 - **Dual-Engine Conversation System**: Combines a *Deterministic Flow Engine* (guaranteeing zero-hallucination lead capture, statutory disclaimers, and consent verification) with a *Grounded LLM* (for natural language multilingual intent detection and FAQ answering bounded to the verified knowledge base).
 - **Multilingual Support**: Seamless tri-lingual communication in **Gujarati (ગુજરાતી), Hindi (हिंदी), and English**.
 - **Human Handover Protocol**: Instant context-rich handover to founder Kaushik Raval or designated advisory team members.
-- **Approved Obsidian-Mint UI**: High-density advisor CRM dashboard utilizing calibrated dark slate surfaces (`#212227`, `#2A2D34`), electric mint accents (`#13AD87`), and high-contrast white action pills (`#FFFFFF`). The full rendered palette lives in [Design Guidelines §2](docs/DESIGN_GUIDELINES.md#2-color-system--design-tokens-obsidian-mint-palette).
-
-**Obsidian-Mint palette at a glance** — the `#808080` swatch frame is documentation-only and is not a product token:
-
-```mermaid
-flowchart LR
-    P1["Canvas"] ~~~ P2["Card"] ~~~ P3["Muted Pill"] ~~~ P4["Mint Accent"] ~~~ P5["White Action"] ~~~ P6["Charcoal Text"]
-
-    style P1 fill:#212227,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P2 fill:#2A2D34,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P3 fill:#343842,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P4 fill:#13AD87,stroke:#808080,stroke-width:2px,color:#1A1D24
-    style P5 fill:#FFFFFF,stroke:#808080,stroke-width:2px,color:#1A1D24
-    style P6 fill:#1A1D24,stroke:#808080,stroke-width:2px,color:#FFFFFF
-```
+- **Approved Obsidian-Mint UI**: High-density advisor CRM dashboard utilizing calibrated dark slate surfaces (`#212227`, `#2A2D34`), electric mint accents (`#13AD87`), and high-contrast white action pills (`#FFFFFF`).
 
 ---
 
@@ -63,7 +49,7 @@ All engineering documentation is strictly maintained within the `.github/` tree.
 | [`.github/README.md`](README.md) | **Documentation Index** | All Developers & Agents | Central directory index, navigation map, and maintenance rules. |
 | [`docs/PRD.md`](docs/PRD.md) | **Product Requirements** | Product, Engineers, QA | Defines product vision, personas, scope, functional/non-functional requirements. |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | **System Architecture** | Architects, Backend/Frontend Devs | System topology, component boundaries, database schemas, and data pipelines. |
-| [`docs/DESIGN_GUIDELINES.md`](docs/DESIGN_GUIDELINES.md) | **UI/UX Guidelines** | Frontend Engineers, UI/UX | Design philosophy, rendered color swatch boards, token tables, typography, layouts, and accessibility standards. |
+| [`docs/DESIGN_GUIDELINES.md`](docs/DESIGN_GUIDELINES.md) | **UI/UX Guidelines** | Frontend Engineers, UI/UX | Design philosophy, color tokens, typography, layouts, and accessibility standards. |
 | [`docs/DEVELOPMENT_WORKFLOW.md`](docs/DEVELOPMENT_WORKFLOW.md) | **Development Workflow** | Developers, DevOps | Local setup, environment config, testing, debugging, and deployment practices. |
 | [`docs/GIT_CONVENTIONS.md`](docs/GIT_CONVENTIONS.md) | **Git Conventions** | Developers, AI Agents | Conventional Commits, branch naming, PR rules, and mandatory AI safety governance. |
 | [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) | **Contribution Standards** | Contributors, Reviewers | Code quality gates, naming conventions, review checklists, and PR standards. |
@@ -122,4 +108,3 @@ flowchart TD
    - `[PROPOSED]`: Design or technical proposal awaiting review.
    - `[PENDING CONFIRMATION]`: Blocked on client or stakeholder input.
 5. **No Ephemeral Drift**: When code changes modify database schemas, API contracts, or UI token systems, the respective documentation files must be updated in the same pull request.
-6. **Rendered Color Standards**: Never rely on inline HTML/CSS for color previews (GitHub strips `style` attributes). Render palette and status-color changes as Mermaid swatch boards using the exact token values, a **2px `#808080` documentation-only frame**, and keep the adjacent accessible hex/role tables in sync. `#808080` is deliberately outside the Obsidian-Mint palette and must not become a product token.

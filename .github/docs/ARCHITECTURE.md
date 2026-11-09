@@ -57,7 +57,7 @@ flowchart TD
 
 ## 2. The Dual-Engine Conversation Architecture
 
-In accordance with [DEC-007](DECISIONS.md#dec-007-dual-engine-conversation-architecture-deterministic-flow--grounded-llm) and strict financial services regulatory standards (AMFI ARN: 179325), conversational processing is strictly partitioned into two specialized engines:
+In accordance with [DEC-007](DECISIONS.md#dec-007-dual-engine-architecture-deterministic-flow--grounded-knowledge-base-llm) and strict financial services regulatory standards (AMFI ARN: 179325), conversational processing is strictly partitioned into two specialized engines:
 
 ```mermaid
 flowchart TD
@@ -236,18 +236,6 @@ sequenceDiagram
 | **Queue & Cache** | **Redis + BullMQ** | Decoupled webhook processing, rate limiting, and scheduled follow-up tasks. |
 | **Knowledge Base** | **PostgreSQL pgvector / Embeddings** | Semantic similarity search for approved FAQ answering. |
 | **External Messaging** | **Meta WhatsApp Cloud API (v20.0+)** | Official WhatsApp Business messaging gateway. |
-
-**Obsidian-Mint palette reference** — exact tokens and semantic roles are maintained in [Design Guidelines §2](DESIGN_GUIDELINES.md#2-color-system--design-tokens-obsidian-mint-palette). The `#808080` swatch frame is documentation-only and is not a product token:
-
-```mermaid
-flowchart LR
-    P1["Canvas"] ~~~ P2["Card"] ~~~ P3["Mint Accent"] ~~~ P4["White Action"]
-
-    style P1 fill:#212227,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P2 fill:#2A2D34,stroke:#808080,stroke-width:2px,color:#FFFFFF
-    style P3 fill:#13AD87,stroke:#808080,stroke-width:2px,color:#1A1D24
-    style P4 fill:#FFFFFF,stroke:#808080,stroke-width:2px,color:#1A1D24
-```
 
 ---
 

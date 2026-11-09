@@ -25,7 +25,7 @@ This repository strictly enforces the [Conventional Commits](https://www.convent
 | `fix` | A bug fix. | `fix(auth): resolve session cookie expiration bug` |
 | `docs` | Documentation changes only. | `docs(architecture): update webhook sequence diagram` |
 | `style` | Formatting, missing semi-colons, whitespace (no code change). | `style(chat): format chat bubble tail spacing` |
-| `refactor` | Code change that neither fixes a bug nor adds a feature. | `refactor(api): separate webhook signature validation` |
+| `refactor`| Code change that neither fixes a bug nor adds a feature. | `refactor(api): separate webhook signature validation` |
 | `perf` | Code change that improves execution performance. | `perf(db): add composite index on conversation lookup` |
 | `test` | Adding missing tests or correcting existing tests. | `test(webhook): add HMAC invalid payload test cases` |
 | `build` | Changes affecting build system or external dependencies. | `build(deps): update prisma to version 5.x` |
