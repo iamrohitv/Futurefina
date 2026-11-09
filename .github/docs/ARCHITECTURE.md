@@ -229,13 +229,33 @@ sequenceDiagram
 
 | Layer | Technology | Role in Futurefina Platform |
 | :--- | :--- | :--- |
-| **Frontend Dashboard** | **Next.js (React 19, TypeScript)** | High-density admin console utilizing the **Obsidian-Mint** design system. |
-| **Styling & Theme** | **Tailwind CSS + shadcn/ui** | Custom tokens for `#212227` canvas, `#2A2D34` cards, and `#13AD87` mint accents. |
+| **Frontend Dashboard** | **Next.js 16 (React 19, TypeScript strict)** | High-density admin console utilizing the **Obsidian-Mint** design system. |
+| **Styling & Theme** | **Tailwind CSS v4 + shadcn/ui (Radix)** | Custom tokens for `#212227` canvas, `#2A2D34` cards, and `#13AD87` mint accents. |
 | **Backend & Routing** | **Node.js (TypeScript) / Express** | Webhook endpoint, state machine routing, WebSocket hub. |
 | **Primary Database** | **PostgreSQL (v15+)** | ACID transactions for lead records, consent logs, and service catalogs. |
 | **Queue & Cache** | **Redis + BullMQ** | Decoupled webhook processing, rate limiting, and scheduled follow-up tasks. |
 | **Knowledge Base** | **PostgreSQL pgvector / Embeddings** | Semantic similarity search for approved FAQ answering. |
 | **External Messaging** | **Meta WhatsApp Cloud API (v20.0+)** | Official WhatsApp Business messaging gateway. |
+
+### 5.1 Repository Layout (npm Workspaces)
+
+```text
+futurefina/
+├── apps/
+│   └── web/                       # Next.js 16 advisor console (Phases 1–4)
+│       ├── src/app/               # App Router routes: /, /inbox, /leads, /settings
+│       ├── src/components/        # layout, dashboard, leads, shadcn ui primitives
+│       ├── src/lib/               # format helpers, mock data, service colours
+│       ├── e2e/                   # Playwright journeys and axe scans
+│       └── test-results/          # generated screenshots (git-ignored)
+├── packages/
+│   └── shared/                    # domain types, 10 statuses, 6 categories, labels
+├── .github/                       # documentation SSOT and decision log
+├── .opencode/skills/              # project-scoped agent instructions
+└── package.json                   # workspace scripts and lockfile
+```
+
+`apps/api` is added in Phase 5; until then, `apps/web/src/lib/mock-data.ts` is the single fixture boundary and is replaced by API-backed repository functions without changing `packages/shared` types. See [DEC-010](DECISIONS.md#dec-010-monorepo-workspace-layout-and-mock-first-ui-delivery).
 
 ---
 

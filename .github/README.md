@@ -24,7 +24,7 @@ Welcome to the central documentation repository for **Futurefina Consultancy** (
 
 ## 2. Documentation Directory Structure
 
-All engineering documentation is strictly maintained within the `.github/` tree. No root-level documentation files or workflow automation scripts exist outside this designated directory.
+All engineering documentation is strictly maintained within the `.github/` tree. Root-level files are limited to workspace configuration; `.opencode/` contains project-scoped agent instructions, not product documentation. No root-level README or workflow automation files exist outside these locations.
 
 ```text
 .github/
@@ -39,6 +39,21 @@ All engineering documentation is strictly maintained within the `.github/` tree.
     ├── SECURITY.md                     # Secrets, Webhook Security & Data Privacy
     └── DECISIONS.md                    # Chronological Architecture Decision Records (ADR)
 ```
+
+### 2.1 Implementation Workspace
+
+```text
+apps/
+└── web/                                # Next.js 16 advisor console (Phases 1–4)
+    ├── src/app/                        # App Router: /, /inbox, /leads, /settings
+    ├── src/components/                 # layout, dashboard, leads, shadcn primitives
+    ├── src/lib/                        # formatters, typed fixtures, service colours
+    └── e2e/                            # Playwright journeys and axe scans
+packages/
+└── shared/                             # domain types, statuses, categories, labels
+```
+
+Phase 1 delivers the Overview dashboard against typed fixtures. The API and PostgreSQL layers are added in Phase 5 per [DEC-010](docs/DECISIONS.md#dec-010-monorepo-workspace-layout-and-mock-first-ui-delivery).
 
 ---
 

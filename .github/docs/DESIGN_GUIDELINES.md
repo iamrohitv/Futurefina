@@ -26,12 +26,18 @@ In accordance with [DEC-006](DECISIONS.md#dec-006-adoption-of-obsidian-mint-ui-c
 | `--surface-pill-muted` | `#343842` | Muted secondary controls (e.g. "View" buttons, "Weekly ⌵" dropdown filter pills). |
 | `--surface-hatch-pattern`| `#353942` | 45-degree diagonal striped fill for projected, scheduled, or inactive timeline/revenue bars. |
 | `--border-subtle` | `#32353E` | Optical hairline borders, panel separators, table row dividers. |
-| `--accent-mint` | `#13AD87` | **Primary Brand Accent**: Active navigation pill ("Overview"), positive metric pills ("+2.1%"), active chart bar ("$320"), gauge arc ("72%"), progress indicators, Help Center notification badge. |
+| `--accent-mint` | `#13AD87` | **Primary Brand Accent**: Active navigation pill ("Overview"), positive metric pills ("+2.1%"), active chart bar ("₹12.4L"), gauge arc ("72%"), progress indicators, Help Center notification badge. |
 | `--accent-mint-hover` | `#109B78` | Hover and active pressed states for mint interactive components. |
 | `--accent-mint-subtle`| `#11382E` | Muted dark-mint background for subtle chip badges and active thread highlights. |
 | `--surface-inverted` | `#FFFFFF` | **Inverted Spotlight Card**: Pure white card surface (e.g. bottom-left Customer Metric / VIP spotlight card) set against the dark canvas for intentional visual contrast. |
 | `--btn-primary-bg` | `#FFFFFF` | **Primary Action Pill**: Pure white CTA buttons (e.g. "View chart ↗") with dark text (`#1A1D24`). |
-| `--tooltip-badge-bg` | `#FFFFFF` | **Metric Tooltips**: Floating white pill badges for active chart values ("$320", "112K", "70%", "25%", "50%"). |
+| `--tooltip-badge-bg` | `#FFFFFF` | **Metric Tooltips**: Floating white pill badges for active chart values ("₹12.4L", "₹1,200", "72%", "25%", "50%"). |
+
+**Accessible text ramp** (contrast verified against both `--surface-canvas` and `--surface-card`):
+- `--text-primary`: `#FFFFFF` — 15.9:1 on canvas, 13.8:1 on cards.
+- `--text-secondary`: `#A7ADBB` — 7.1:1 on canvas, 6.1:1 on cards.
+- `--text-tertiary`: `#969AA8` — 5.7:1 on canvas, 4.9:1 on cards.
+- Small tertiary copy must not be placed on `--surface-pill-muted` (`#343842`); that pairing is 4.2:1 and fails AA for normal text.
 
 ### 2.2 Categorical & Data Visualization Accents
 Used for the 6 service categories, donut charts, and task scheduling:
@@ -39,8 +45,10 @@ Used for the 6 service categories, donut charts, and task scheduling:
 | :--- | :--- | :--- |
 | `--accent-blue` | `#156DF5` | Middle ring of Donut chart, Stocks & Demat indicators, active video call avatar border. |
 | `--accent-coral` | `#FC5C46` | Inner ring of Donut chart, Insurance indicators, "Settings" notification badge, urgent escalations. |
-| `--accent-peach` | `#FA7D52` | Loans & ITR indicators, stage 2 pipeline progress. |
+| `--accent-peach` | `#FA7D52` | Loans indicators and stage 2 pipeline progress. |
 | `--accent-purple` | `#8B5CF6` | Contact avatar ring badge (Devon Lane), Mutual Funds category badge. |
+| `--accent-amber` | `#FBBF24` | ITR & Tax category indicator and contact-attempted lifecycle accents. |
+| `--accent-mint` | `#13AD87` | Existing Customer Support category indicator; also the primary accent. |
 
 ### 2.3 Lead Status Semantic Palette (10 Official Statuses)
 | Lead Status | Background Token | Text Color | Visual Indicator Role |
@@ -53,7 +61,7 @@ Used for the 6 service categories, donut charts, and task scheduling:
 | **Follow-up required** | `#422D1E` | `#FB923C` | Orange pill; customer requested scheduled callback. |
 | **Converted** | `#0D3822` | `#34D399` | Emerald green pill; investment/policy/ITR finalized. |
 | **Not interested** | `#2B2D34` | `#9CA3AF` | Neutral muted pill; lead declined service. |
-| **Closed** | `#1F2228` | `#6B7280` | Dark gray pill; transaction complete or archived. |
+| **Closed** | `#1F2228` | `#9CA3AF` | Dark gray pill; transaction complete or archived. Text lightened from `#6B7280` to reach 6.28:1 AA contrast. |
 | **Escalated / complaint** | `#451A1A` | `#F87171` | High-visibility crimson pill; urgent manager intervention. |
 
 ---

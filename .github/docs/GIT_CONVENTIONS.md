@@ -120,7 +120,7 @@ git pull origin main
 git checkout -b feat/inbox-assignment
 
 # 3. Work on code, verify tests
-pnpm test
+npm run test
 
 # 4. Check modified files
 git status

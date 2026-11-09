@@ -1,0 +1,28 @@
+{
+  "name": "futurefina",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Futurefina WhatsApp CRM — monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @futurefina/web",
+    "build": "npm run build --workspace @futurefina/web",
+    "start": "npm run start --workspace @futurefina/web",
+    "lint": "npm run lint --workspace @futurefina/web",
+    "lint:fix": "npm run lint:fix --workspace @futurefina/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspace @futurefina/web",
+    "test:watch": "npm run test:watch --workspace @futurefina/web",
+    "test:coverage": "npm run test:coverage --workspace @futurefina/web",
+    "test:e2e": "npm run test:e2e --workspace @futurefina/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  }
+}

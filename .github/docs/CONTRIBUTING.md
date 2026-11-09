@@ -26,8 +26,8 @@ Every file committed to this repository must satisfy the automated quality pipel
    - ESLint and Prettier must pass with **0 errors and 0 warnings**.
    - Code must be formatted automatically prior to submitting a pull request:
      ```bash
-     pnpm lint:fix
-     pnpm format
+     npm run lint:fix
+     npm run format
      ```
 3. **Clean Architecture Separation**:
    - Keep controllers thin and services framework-agnostic.
@@ -66,9 +66,10 @@ No pull request modifying business logic or data schemas will be merged without 
 3. **Pre-PR Verification Checklist**:
    Run the full verification suite before submitting:
    ```bash
-   pnpm lint
-   pnpm typecheck
-   pnpm test
+   npm run lint
+   npm run typecheck
+   npm run test
+   npm run build
    ```
 
 ---
