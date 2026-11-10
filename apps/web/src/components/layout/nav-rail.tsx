@@ -78,25 +78,23 @@ export function NavRail() {
             className="flex items-center gap-2 rounded-xl focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none"
           >
             <BrandMark />
-            <span className="text-sm font-bold tracking-tight text-white">
-              Futurefina
-            </span>
+            <span className="text-sm font-bold tracking-tight text-white">Futurefina</span>
           </Link>
         </div>
 
         <nav aria-label="Primary" className="mt-6 px-3">
-          {NAV_SECTIONS.map((section) => (
+          {NAV_SECTIONS.map((section, sIdx) => (
             <div key={section.label} className="mb-4">
               <h3 className="mb-2 px-2 text-[10px] font-semibold tracking-wider text-text-tertiary uppercase">
                 {section.label}
               </h3>
               <ul className="space-y-0.5">
-                {section.items.map((item) => {
+                {section.items.map((item, iIdx) => {
                   const active = isActivePath(pathname, item.href);
                   const Icon = item.icon;
 
                   return (
-                    <li key={item.href}>
+                    <li key={`item-${sIdx}-${iIdx}`}>
                       <Link
                         href={item.href}
                         aria-current={active ? "page" : undefined}
@@ -115,7 +113,7 @@ export function NavRail() {
                         <Icon className="size-4" strokeWidth={2} />
                         <span className="font-medium">{item.label}</span>
                         {item.badge ? (
-                          <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-green px-1.5 font-mono text-[9px] font-semibold text-black">
+                          <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 font-mono text-[9px] font-semibold bg-green text-black">
                             {item.badge}
                           </span>
                         ) : null}
@@ -152,16 +150,16 @@ export function NavRail() {
                 className="flex items-center gap-2 rounded-full px-2 py-1.5 text-white hover:bg-pill"
               >
                 <div className="relative">
-                  <span className="grid h-7 w-7 items-center justify-center rounded-full bg-green font-mono text-[10px] font-semibold text-black ring-2 ring-green/40">
+                  <span className="relative grid h-7 w-7 items-center justify-center rounded-full bg-green font-mono text-[10px] font-semibold text-black ring-2 ring-green/40">
                     {getInitials("Wade Warren")}
                   </span>
                   <span className="absolute right-0 bottom-0 size-2 rounded-full bg-green ring-2 ring-canvas" />
                 </div>
                 <div className="hidden sm:block">
-                  <p className="text-xs leading-tight font-medium text-white">
+                  <p className="text-xs font-medium text-white leading-tight">
                     Wade Warren
                   </p>
-                  <p className="text-[10px] leading-tight text-text-tertiary">
+                  <p className="text-[10px] text-text-tertiary leading-tight">
                     Admin
                   </p>
                 </div>
@@ -177,12 +175,12 @@ export function NavRail() {
         className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-canvas/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden"
       >
         <ul className="grid grid-cols-4">
-          {NAV_SECTIONS[0].items.map((item) => {
+          {NAV_SECTIONS[0].items.map((item, iIdx) => {
             const active = isActivePath(pathname, item.href);
             const Icon = item.icon;
 
             return (
-              <li key={item.href}>
+              <li key={`mobile-${iIdx}`}>
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
@@ -199,7 +197,7 @@ export function NavRail() {
                   <Icon className="size-5" strokeWidth={2} />
                   {item.label}
                   {item.badge ? (
-                    <span className="absolute top-2 right-[calc(50%-22px)] grid h-4 min-w-4 items-center justify-center rounded-full bg-green px-1 font-mono text-[9px] font-semibold text-black">
+                    <span className="absolute top-2 right-[calc(50%-22px)] grid h-4 min-w-4 items-center justify-center rounded-full px-1 font-mono text-[9px] font-semibold bg-green text-black">
                       {item.badge}
                     </span>
                   ) : null}
