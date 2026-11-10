@@ -60,17 +60,17 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
 
   return (
     <div className={cn("flex h-full flex-col gap-6", className)}>
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-white">
-            Settings
-          </h1>
-          <p className="text-sm text-text-secondary">
-            Zero-code configuration for FAQs, pricing, partner links, office
-            hours, and team access.
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-white">
+              Settings
+            </h1>
+            <p className="text-sm text-text-secondary">
+              Zero-code configuration for FAQs, pricing, partner links, office
+              hours, and team access.
+            </p>
+          </div>
           <span className="text-[10px] tracking-wider text-text-tertiary uppercase">
             Admin · Kaushik Raval
           </span>
@@ -78,7 +78,7 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 gap-1 lg:grid-cols-3">
+        <TabsList className="no-scrollbar flex w-full flex-nowrap gap-1 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
           {TAB_ITEMS.map((tab) => (
             <TabsTrigger
               key={tab.key}
@@ -98,7 +98,7 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
 
         {/* ITR Pricing Tab */}
         <TabsContent value="itr-pricing" className="mt-6 space-y-4">
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {itrPricingTiers.map((tier) => (
               <div
                 key={tier.id}
@@ -223,7 +223,7 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
               + Add Link
             </button>
           </div>
-          <Table>
+          <Table className="min-w-full">
             <TableHeader>
               <TableRow>
                 <TableHead className="h-9 pl-0 text-[10px] tracking-[0.12em] text-text-tertiary uppercase">
@@ -326,7 +326,7 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
         {/* Team & Roles Tab */}
         <TabsContent value="team" className="mt-6 space-y-4">
           <h2 className="text-sm font-semibold text-white">Team & Roles</h2>
-          <Table>
+          <Table className="min-w-full">
             <TableHeader>
               <TableRow>
                 <TableHead className="h-9 pl-0 text-[10px] tracking-[0.12em] text-text-tertiary uppercase">
@@ -402,7 +402,7 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
           <h2 className="text-sm font-semibold text-white">
             Configuration Audit Trail
           </h2>
-          <Table>
+          <Table className="min-w-full">
             <TableHeader>
               <TableRow>
                 <TableHead className="h-9 pl-0 text-[10px] tracking-[0.12em] text-text-tertiary uppercase">
@@ -474,8 +474,6 @@ export function SettingsWorkspace({ className }: SettingsTabProps = {}) {
           </Table>
         </TabsContent>
       </Tabs>
-
-      <div className="fixed inset-0 z-50" />
     </div>
   );
 }
