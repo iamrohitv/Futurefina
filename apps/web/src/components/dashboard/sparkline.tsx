@@ -10,7 +10,7 @@ interface SparklineProps {
 export function Sparkline({
   data,
   label,
-  stroke = "var(--accent-mint)",
+  stroke = "var(--accent-green)",
   className,
 }: SparklineProps) {
   const width = 120;
@@ -43,7 +43,13 @@ export function Sparkline({
       preserveAspectRatio="none"
       className={cn("h-full w-full", className)}
     >
-      <path d={areaPath} fill={stroke} fillOpacity={0.08} />
+      <defs>
+        <linearGradient id="sparkline-gradient" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="currentColor" stopOpacity={0.2} />
+          <stop offset="100%" stopColor="currentColor" stopOpacity={0} />
+        </linearGradient>
+      </defs>
+      <path d={areaPath} fill="url(#sparkline-gradient)" />
       <path
         d={linePath}
         fill="none"
@@ -51,7 +57,6 @@ export function Sparkline({
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
-        vectorEffect="non-scaling-stroke"
       />
       <circle cx={lastPoint[0]} cy={lastPoint[1]} r={2.5} fill={stroke} />
     </svg>

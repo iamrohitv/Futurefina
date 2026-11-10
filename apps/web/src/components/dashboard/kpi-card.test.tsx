@@ -43,17 +43,10 @@ describe("KpiCard", () => {
           deltaPercent: -3.1,
         }}
         icon={Users}
-        tone="peach"
+        tone="amber"
       />,
     );
 
     expect(screen.getByText("3.1%")).toBeInTheDocument();
-  });
-
-  it("renders the inverted variant without losing the metric", () => {
-    render(<KpiCard metric={metric} icon={Users} inverted />);
-
-    expect(screen.getByText("Total new leads")).toBeInTheDocument();
-    expect(screen.getByText("128")).toBeInTheDocument();
   });
 });

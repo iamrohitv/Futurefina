@@ -8,7 +8,7 @@ test.describe("Overview dashboard", () => {
     await page.goto("/");
 
     await expect(
-      page.getByRole("heading", { name: /good morning, kaushik/i }),
+      page.getByRole("heading", { name: /dashboard/i }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Pipeline activity", exact: true }),

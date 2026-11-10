@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Bell, CalendarDays, ChevronDown, Plus, Search } from "lucide-react";
+import { Bell, Calendar, ChevronDown, Maximize, Search } from "lucide-react";
 import { BrandMark } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,82 +8,76 @@ import { Input } from "@/components/ui/input";
 export function TopBar() {
   return (
     <header className="sticky top-0 z-30 flex h-[72px] shrink-0 items-center gap-3 border-b border-hairline bg-canvas/90 px-4 backdrop-blur-xl sm:px-6">
-      <Link
-        href="/"
-        aria-label="Futurefina CRM — Overview"
-        className="rounded-xl focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none md:hidden"
-      >
-        <BrandMark size="sm" />
-      </Link>
+      <div className="flex items-center gap-3">
+        <Link
+          href="/"
+          aria-label="Futurefina CRM — Overview"
+          className="flex items-center gap-2 rounded-xl focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none md:hidden"
+        >
+          <BrandMark size="sm" />
+        </Link>
+        <div className="text-lg font-semibold tracking-tight text-white">
+          Dashboard
+        </div>
+      </div>
 
-      <div className="relative hidden w-full max-w-[420px] lg:block">
+      <div className="relative max-w-[560px] flex-1">
         <Search
           aria-hidden="true"
           className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-text-tertiary"
         />
         <label htmlFor="global-search" className="sr-only">
-          Search leads, phone numbers, or lead codes
+          Search anything
         </label>
         <Input
           id="global-search"
           type="search"
-          placeholder="Search leads, phone, or lead code…"
-          className="h-9 rounded-full border-hairline bg-card pr-4 pl-9 text-sm placeholder:text-text-tertiary focus-visible:border-mint/60 focus-visible:ring-mint/20"
+          placeholder="Search anything"
+          className="h-9 rounded-full border-hairline bg-card pr-4 pl-9 text-sm placeholder:text-text-tertiary focus-visible:border-green/60 focus-visible:ring-green/20"
         />
       </div>
 
-      <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
-        <span className="hidden h-9 items-center gap-2 rounded-full border border-hairline bg-card px-3 text-xs font-medium text-text-secondary sm:inline-flex">
-          <CalendarDays aria-hidden="true" className="size-3.5" />
-          This month
-          <ChevronDown
-            aria-hidden="true"
-            className="size-3.5 text-text-tertiary"
-          />
-        </span>
-
+      <div className="ml-auto flex items-center gap-2 sm:gap-3">
         <Button
-          asChild
-          variant="ghost"
+          variant="outline"
           size="icon"
-          className="relative size-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          aria-label="Expand view"
         >
-          <Link href="/inbox" aria-label="Notifications: 2 urgent handovers">
-            <Bell aria-hidden="true" className="size-[18px]" />
-            <span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-mint ring-2 ring-canvas" />
-          </Link>
+          <Maximize className="size-4" aria-hidden="true" />
         </Button>
-
         <Button
-          asChild
-          className="h-9 rounded-full bg-white px-4 text-[#1a1d24] shadow-[0_8px_24px_-14px_rgba(255,255,255,0.7)] hover:bg-white/90 max-sm:size-9 max-sm:px-0"
+          variant="outline"
+          size="icon"
+          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          aria-label="Calendar"
         >
-          <Link href="/leads" aria-label="New lead">
-            <Plus aria-hidden="true" className="size-4" />
-            <span className="hidden sm:inline">New lead</span>
-          </Link>
+          <Calendar className="size-4" aria-hidden="true" />
         </Button>
-
-        <span className="mx-1 hidden h-6 w-px bg-hairline xl:block" />
-
-        <Link
-          href="/settings"
-          className="hidden items-center gap-2 rounded-full border border-hairline bg-card py-1 pr-3 pl-1.5 transition-colors hover:bg-pill focus-visible:ring-2 focus-visible:ring-mint focus-visible:outline-none xl:flex"
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          aria-label="Notifications: 2 urgent handovers"
         >
-          <span className="grid size-7 place-items-center rounded-full bg-pill font-mono text-[10px] font-semibold text-white ring-1 ring-mint/30">
-            KR
-          </span>
-          <span className="leading-tight">
-            <span className="block text-xs font-medium text-white">
-              Kaushik Raval
-            </span>
-            <span className="block text-[10px] text-text-tertiary">Admin</span>
-          </span>
-          <ChevronDown
-            aria-hidden="true"
-            className="size-3.5 text-text-tertiary"
+          <Bell className="size-4" aria-hidden="true" />
+          <span className="absolute top-1 right-1 size-2 rounded-full bg-green ring-2 ring-canvas" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          aria-label="Wade Warren — Admin profile"
+        >
+          <Image
+            className="rounded-full"
+            src="https://i.pravatar.cc/100?img=11"
+            alt="Wade Warren"
+            width={32}
+            height={32}
           />
-        </Link>
+          <ChevronDown className="ml-1 size-3 text-text-tertiary" />
+        </Button>
       </div>
     </header>
   );

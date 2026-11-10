@@ -19,7 +19,8 @@ export function PipelineChart({ points }: PipelineChartProps) {
     (sum, point) => sum + point.qualified,
     0,
   );
-  const averagePerDay = Math.round(totalNewLeads / points.length);
+  const averagePerDay =
+    points.length > 0 ? Math.round(totalNewLeads / points.length) : 0;
   const qualificationRate =
     totalNewLeads === 0
       ? 0
@@ -31,7 +32,7 @@ export function PipelineChart({ points }: PipelineChartProps) {
   return (
     <div>
       <div className="flex gap-3">
-        <div className="relative h-[180px] w-6 shrink-0 font-mono text-[10px] text-text-tertiary">
+        <div className="relative h-[200px] w-6 shrink-0 font-mono text-[10px] text-text-tertiary">
           {ticks.map((tick) => (
             <span
               key={tick}
@@ -44,7 +45,7 @@ export function PipelineChart({ points }: PipelineChartProps) {
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="relative h-[180px]">
+          <div className="relative h-[200px]">
             <div aria-hidden="true" className="absolute inset-0">
               {ticks.map((tick) => (
                 <div
@@ -55,8 +56,9 @@ export function PipelineChart({ points }: PipelineChartProps) {
               ))}
             </div>
 
-            <div className="absolute inset-0 flex items-end justify-between gap-1.5 sm:gap-3">
-              {points.map((point) => {
+            <div className="absolute inset-0 flex items-end justify-between gap-1 sm:gap-3">
+              {points.map((point, index) => {
+                const isLast = index === points.length - 1;
                 const height = (point.newLeads / upperBound) * 100;
                 const qualifiedShare =
                   point.newLeads === 0
@@ -71,17 +73,19 @@ export function PipelineChart({ points }: PipelineChartProps) {
                     <div
                       role="img"
                       aria-label={`${point.label}: ${point.newLeads} new leads, ${point.qualified} qualified${point.projected ? ", projected" : ""}`}
-                      className="relative w-full max-w-9 rounded-md bg-chart-track"
+                      className="bg-chart-track relative w-full max-w-9 rounded-md"
                       style={{ height: `${height}%` }}
                     >
-                      <span className="absolute -top-5 left-1/2 z-10 -translate-x-1/2 rounded-full bg-[var(--state-neutral-inverted-bg)] px-1.5 py-0.5 font-mono text-[9px] font-semibold text-[var(--state-neutral-inverted-fg)] shadow-sm">
-                        {point.newLeads}
-                      </span>
+                      {isLast ? (
+                        <span className="absolute -top-5 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white px-1.5 py-0.5 font-mono text-[9px] font-semibold text-black shadow-lg">
+                          {point.newLeads}
+                        </span>
+                      ) : null}
                       <div className="absolute inset-0 overflow-hidden rounded-md">
                         <div
                           className={cn(
                             "absolute inset-x-0 bottom-0 border-t-2 border-card",
-                            point.projected ? "bg-hatch-mint" : "bg-mint",
+                            point.projected ? "bg-hatch-green" : "bg-green",
                           )}
                           style={{ height: `${qualifiedShare}%` }}
                         />
@@ -93,14 +97,14 @@ export function PipelineChart({ points }: PipelineChartProps) {
             </div>
           </div>
 
-          <div className="mt-2 flex justify-between gap-1.5 sm:gap-3">
+          <div className="mt-3 flex justify-between gap-1.5 sm:gap-3">
             {points.map((point, index) => (
               <span
                 key={point.label}
                 className={cn(
                   "flex-1 text-center text-[10px] whitespace-nowrap",
                   index === points.length - 1
-                    ? "text-mint"
+                    ? "text-green"
                     : "text-text-tertiary",
                 )}
               >
@@ -111,41 +115,43 @@ export function PipelineChart({ points }: PipelineChartProps) {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-4 text-[10px] text-text-tertiary">
-        <span className="inline-flex items-center gap-1.5">
-          <span className="size-2 rounded-sm bg-chart-track" /> New leads
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="size-2 rounded-sm bg-mint" /> Qualified
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <span className="size-2 rounded-sm bg-hatch-mint ring-1 ring-white/10" />{" "}
-          Projected
-        </span>
+      <div className="mt-6 flex flex-wrap items-center gap-6 text-[10px] text-text-tertiary">
+        <div className="flex items-center gap-2">
+          <span className="bg-chart-track h-2 w-2 rounded-full" />
+          <span className="font-mono tabular-nums">New leads</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-green" />
+          <span className="font-mono tabular-nums">Qualified</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-green/20 ring-1 ring-white/10" />
+          <span className="font-mono tabular-nums">Projected</span>
+        </div>
       </div>
 
-      <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-hairline pt-3">
-        <div>
+      <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-hairline pt-4">
+        <div className="text-center">
           <dt className="text-[9px] tracking-[0.12em] text-text-tertiary uppercase">
             Avg / day
           </dt>
-          <dd className="mt-0.5 font-mono text-xs font-medium text-white tabular-nums">
+          <dd className="mt-1 font-mono text-xs font-medium text-white tabular-nums">
             {averagePerDay}
           </dd>
         </div>
-        <div>
+        <div className="text-center">
           <dt className="text-[9px] tracking-[0.12em] text-text-tertiary uppercase">
             Qualified
           </dt>
-          <dd className="mt-0.5 font-mono text-xs font-medium text-white tabular-nums">
+          <dd className="mt-1 font-mono text-xs font-medium text-white tabular-nums">
             {qualificationRate}%
           </dd>
         </div>
-        <div>
+        <div className="text-center">
           <dt className="text-[9px] tracking-[0.12em] text-text-tertiary uppercase">
             Peak day
           </dt>
-          <dd className="mt-0.5 font-mono text-xs font-medium text-white tabular-nums">
+          <dd className="mt-1 font-mono text-xs font-medium text-white tabular-nums">
             {peakDay.label} · {peakDay.newLeads}
           </dd>
         </div>

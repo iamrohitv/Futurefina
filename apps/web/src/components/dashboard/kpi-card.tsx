@@ -6,24 +6,24 @@ import { Sparkline } from "@/components/dashboard/sparkline";
 import { formatPercent } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-type KpiTone = "mint" | "blue" | "peach" | "purple";
+type KpiTone = "green" | "blue" | "purple" | "amber";
 
 const TONE_STYLES: Record<KpiTone, { icon: string; stroke: string }> = {
-  mint: {
-    icon: "bg-mint-subtle text-mint",
-    stroke: "var(--accent-mint)",
+  green: {
+    icon: "bg-green/10 text-green",
+    stroke: "var(--accent-green)",
   },
   blue: {
     icon: "bg-blue/10 text-blue",
     stroke: "var(--accent-blue)",
   },
-  peach: {
-    icon: "bg-peach/10 text-peach",
-    stroke: "var(--accent-peach)",
-  },
   purple: {
     icon: "bg-purple/10 text-purple",
     stroke: "var(--accent-purple)",
+  },
+  amber: {
+    icon: "bg-amber/10 text-amber",
+    stroke: "var(--accent-amber)",
   },
 };
 
@@ -31,102 +31,63 @@ interface KpiCardProps {
   metric: KpiMetric;
   icon: LucideIcon;
   tone?: KpiTone;
-  inverted?: boolean;
 }
 
-export function KpiCard({
-  metric,
-  icon: Icon,
-  tone = "mint",
-  inverted = false,
-}: KpiCardProps) {
+export function KpiCard({ metric, icon: Icon, tone = "green" }: KpiCardProps) {
   const toneStyles = TONE_STYLES[tone];
   const TrendIcon = metric.deltaPercent >= 0 ? TrendingUp : TrendingDown;
-  const deltaClasses = metric.isImprovement
-    ? inverted
-      ? "bg-[var(--state-improvement-inverted-bg)] text-[var(--state-improvement-inverted-fg)]"
-      : "bg-mint-subtle text-mint"
-    : inverted
-      ? "bg-[var(--state-degradation-inverted-bg)] text-[var(--state-degradation-inverted-fg)]"
-      : "bg-[#451a1a] text-[#f87171]";
+  const isImprovement = metric.isImprovement;
 
   return (
     <Card
       className={cn(
-        "relative gap-0 overflow-hidden py-0 ring-1",
-        inverted
-          ? "bg-[var(--state-neutral-inverted-bg)] text-[var(--state-neutral-inverted-fg)] ring-white"
-          : "bg-card ring-white/[0.06]",
+        "relative gap-0 overflow-hidden py-0 ring-1 ring-white/[0.03]",
+        "bg-gradient-to-br from-white/[0.03] to-transparent",
       )}
     >
-      <div className="px-5 pt-4">
-        <div className="flex items-start justify-between gap-3">
+      <div className="px-6 pt-6">
+        <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p
-              className={cn(
-                "truncate text-[10px] font-medium tracking-[0.14em] uppercase",
-                inverted
-                  ? "text-[var(--state-neutral-inverted-fg)]"
-                  : "text-text-tertiary",
-              )}
-            >
+            <p className="text-[10px] font-semibold tracking-[0.14em] text-text-tertiary uppercase">
               {metric.label}
             </p>
-            <p
-              className={cn(
-                "mt-2 font-heading text-[28px] leading-none font-semibold tracking-tight tabular-nums",
-                inverted
-                  ? "text-[var(--state-neutral-inverted-fg)]"
-                  : "text-white",
-              )}
-            >
+            <p className="mt-1 font-heading text-2xl font-bold tracking-tight text-white tabular-nums">
               {metric.displayValue}
+            </p>
+            <p className="mt-1 text-[10px] font-medium text-text-tertiary">
+              {metric.comparisonLabel}
             </p>
           </div>
           <span
             className={cn(
-              "grid size-9 shrink-0 place-items-center rounded-xl",
-              inverted
-                ? "bg-[var(--state-neutral-inverted-bg)] text-[var(--state-neutral-inverted-fg)]"
-                : toneStyles.icon,
+              "grid size-10 shrink-0 place-items-center rounded-xl",
+              toneStyles.icon,
             )}
           >
-            <Icon aria-hidden="true" className="size-4" strokeWidth={2} />
+            <Icon aria-hidden="true" className="size-5" strokeWidth={2} />
           </span>
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1">
           <span
             className={cn(
-              "inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 font-mono text-[10px] font-medium",
-              deltaClasses,
+              "inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-[10px] font-medium",
+              isImprovement
+                ? "bg-green/10 text-green"
+                : "bg-[#451a1a] text-[#f43f5e]",
             )}
           >
             <TrendIcon aria-hidden="true" className="size-3" />
             {formatPercent(Math.abs(metric.deltaPercent))}
           </span>
-          <span
-            className={cn(
-              "text-[10px]",
-              inverted
-                ? "text-[var(--state-neutral-inverted-fg)]"
-                : "text-text-tertiary",
-            )}
-          >
-            {metric.comparisonLabel}
-          </span>
         </div>
       </div>
 
-      <div className="mt-3 h-11 px-1.5 pb-1">
+      <div className="mt-4 h-10 px-6 pb-2">
         <Sparkline
           data={metric.sparkline}
           label={`${metric.label} trend`}
-          stroke={
-            inverted
-              ? "var(--state-improvement-inverted-fg)"
-              : toneStyles.stroke
-          }
+          stroke={toneStyles.stroke}
         />
       </div>
     </Card>

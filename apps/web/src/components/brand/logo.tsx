@@ -10,7 +10,7 @@ export function BrandMark({ className, size = "default" }: BrandMarkProps) {
     <span
       aria-hidden="true"
       className={cn(
-        "relative grid place-items-center rounded-xl bg-mint font-heading font-bold text-[#08120f] shadow-[0_8px_24px_-12px_rgba(19,173,135,0.9)]",
+        "relative grid place-items-center rounded-xl bg-green font-heading font-bold text-black shadow-[0_8px_24px_-12px_rgba(34,197,94,0.9)]",
         size === "sm" ? "size-8 text-sm" : "size-10 text-lg",
         className,
       )}

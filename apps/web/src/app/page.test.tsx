@@ -17,13 +17,13 @@ describe("Overview page", () => {
     renderOverview();
 
     expect(
-      screen.getByRole("heading", { name: /good morning, kaushik/i }),
+      screen.getByRole("heading", { name: /dashboard/i }),
     ).toBeInTheDocument();
     expect(screen.getByText("Total new leads")).toBeInTheDocument();
-    expect(screen.getByText("Pipeline activity")).toBeInTheDocument();
-    expect(screen.getByText("Service mix")).toBeInTheDocument();
-    expect(screen.getByText("Recent leads")).toBeInTheDocument();
-    expect(screen.getByText("Today's follow-ups")).toBeInTheDocument();
+    expect(screen.getAllByText("Pipeline activity").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Service mix").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Recent leads").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Today's follow-ups").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Ramesh Patel").length).toBeGreaterThan(0);
   });
 

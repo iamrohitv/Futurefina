@@ -16,7 +16,7 @@ export function AppShell({ children }: AppShellProps) {
         Skip to main content
       </a>
       <NavRail />
-      <div className="flex min-h-dvh flex-col md:pl-[76px]">
+      <div className="flex min-h-dvh flex-col md:pl-[248px]">
         <TopBar />
         <main
           id="main-content"
