@@ -52,7 +52,7 @@ export function InboxWorkspace({ className }: { className?: string } = {}) {
       )}
 
       {/* Tri-pane layout */}
-      <div className={cn("flex flex-1 overflow-hidden", className)}>
+      <div className={cn("flex-1 flex overflow-hidden", className)}>
         {/* Pane 1: Lead Queue */}
         <div className="flex w-[320px] flex-shrink-0 flex-col border-r border-hairline bg-canvas lg:w-[25%]">
           <LeadQueue onLeadSelect={handleLeadSelect} />
