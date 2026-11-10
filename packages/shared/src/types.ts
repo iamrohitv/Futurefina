@@ -144,3 +144,71 @@ export interface UpcomingFollowUp {
   owner: string;
   urgent: boolean;
 }
+
+/** ITR pricing tier configuration. */
+export interface ItrPricingTier {
+  id: string;
+  name: string;
+  description: string;
+  indicativeFee: number;
+  applicableForms: string[];
+  turnaroundDays: number;
+  isActive: boolean;
+}
+
+/** Approved FAQ entry for the knowledge base. */
+export interface FaqEntry {
+  id: string;
+  question: string;
+  answer: string;
+  category: ServiceCategory;
+  languages: PreferredLanguage[];
+  isActive: boolean;
+  updatedAt: string;
+}
+
+/** Partner link configuration. */
+export interface PartnerLink {
+  id: string;
+  name: string;
+  url: string;
+  category: ServiceCategory;
+  isActive: boolean;
+}
+
+/** Office hours configuration per advisor. */
+export interface OfficeHours {
+  id: string;
+  advisorName: string;
+  dayOfWeek: number; // 0=Sun ... 6=Sat
+  startTime: string; // HH:MM
+  endTime: string; // HH:MM
+  timezone: string;
+  isActive: boolean;
+}
+
+/** Team member / advisor configuration. */
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: UserRole;
+  email: string;
+  phoneE164: string;
+  serviceCategories: ServiceCategory[];
+  languages: PreferredLanguage[];
+  isActive: boolean;
+}
+
+/** Configuration change audit trail entry. */
+export interface ConfigAuditEntry {
+  id: string;
+  changedBy: string;
+  changedByRole: UserRole;
+  section: "ITR_PRICING" | "FAQ" | "PARTNER_LINKS" | "OFFICE_HOURS" | "TEAM";
+  action: "CREATE" | "UPDATE" | "DELETE" | "TOGGLE";
+  targetId: string;
+  targetName: string;
+  previousValue: string | null;
+  newValue: string | null;
+  changedAt: string;
+}

@@ -1,10 +1,16 @@
 import type {
+  ConfigAuditEntry,
   ConversationMessage,
+  FaqEntry,
   HandoverDispatch,
+  ItrPricingTier,
   KpiMetric,
   Lead,
+  OfficeHours,
+  PartnerLink,
   PipelinePoint,
   ServiceCategorySummary,
+  TeamMember,
   UpcomingFollowUp,
 } from "@futurefina/shared";
 
@@ -703,4 +709,306 @@ export function getRecentLeads(limit = 6): Lead[] {
 
 export function getLeadById(id: string): Lead | undefined {
   return leads.find((lead) => lead.id === id);
+}
+
+/** Zero-code configuration mock data (Phase 4). */
+
+/** ITR pricing tiers — indicative fees per PRD section 4. */
+export const itrPricingTiers: ItrPricingTier[] = [
+  {
+    id: "itr-001",
+    name: "Salary Only",
+    description:
+      "Salary income only, Form 16 based, AIS reconciliation included.",
+    indicativeFee: 1200,
+    applicableForms: ["ITR-1", "ITR-2"],
+    turnaroundDays: 3,
+    isActive: true,
+  },
+  {
+    id: "itr-002",
+    name: "Salary + Stocks / Capital Gains",
+    description:
+      "Salary with capital gains from stocks, mutual funds, or IPO investments.",
+    indicativeFee: 1500,
+    applicableForms: ["ITR-2", "ITR-3"],
+    turnaroundDays: 5,
+    isActive: true,
+  },
+  {
+    id: "itr-003",
+    name: "High-Volume Trading",
+    description:
+      "F&O trading, intraday, or high-volume equity transactions with audit.",
+    indicativeFee: 2000,
+    applicableForms: ["ITR-3"],
+    turnaroundDays: 7,
+    isActive: true,
+  },
+];
+
+/** Approved FAQ entries for the multilingual knowledge base. */
+export const faqEntries: FaqEntry[] = [
+  {
+    id: "faq-001",
+    question: "What documents are needed for a salary-only ITR?",
+    answer:
+      "Form 16, AIS, bank statements, and investment proofs for the assessment year.",
+    category: "ITR",
+    languages: ["ENGLISH", "HINDI", "GUJARATI"],
+    isActive: true,
+    updatedAt: "2026-11-08T14:30:00+05:30",
+  },
+  {
+    id: "faq-002",
+    question: "Can I start a SIP with ₹5,000 per month?",
+    answer:
+      "Yes. Mutual fund SIPs can start from ₹500 per month depending on the fund house.",
+    category: "MUTUAL_FUNDS",
+    languages: ["ENGLISH", "HINDI", "GUJARATI"],
+    isActive: true,
+    updatedAt: "2026-11-07T11:00:00+05:30",
+  },
+  {
+    id: "faq-003",
+    question: "What is the renewal process for motor insurance?",
+    answer:
+      "Share your RC copy and previous policy. We’ll provide a comprehensive quote within 24 hours.",
+    category: "INSURANCE",
+    languages: ["ENGLISH", "HINDI"],
+    isActive: true,
+    updatedAt: "2026-11-06T16:45:00+05:30",
+  },
+  {
+    id: "faq-004",
+    question: "How long does a loan against mutual funds take?",
+    answer:
+      "Typically 3–5 working days after pledge marking and document verification.",
+    category: "LOANS",
+    languages: ["ENGLISH", "HINDI", "GUJARATI"],
+    isActive: true,
+    updatedAt: "2026-11-05T10:20:00+05:30",
+  },
+];
+
+/** Approved partner links. */
+export const partnerLinks: PartnerLink[] = [
+  {
+    id: "partner-001",
+    name: "Zerodha Demat Account",
+    url: "https://zerodha.com/account-opening",
+    category: "STOCKS_DEMAT",
+    isActive: true,
+  },
+  {
+    id: "partner-002",
+    name: "Groww Mutual Funds",
+    url: "https://groww.in/mutual-funds",
+    category: "MUTUAL_FUNDS",
+    isActive: true,
+  },
+  {
+    id: "partner-003",
+    name: "HDFC ERGO Health Insurance",
+    url: "https://hdfcergo.com/health-insurance",
+    category: "INSURANCE",
+    isActive: true,
+  },
+];
+
+/** Office hours per advisor (IST). */
+export const officeHours: OfficeHours[] = [
+  {
+    id: "oh-001",
+    advisorName: "Kaushik Raval",
+    dayOfWeek: 1,
+    startTime: "09:00",
+    endTime: "18:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-002",
+    advisorName: "Kaushik Raval",
+    dayOfWeek: 2,
+    startTime: "09:00",
+    endTime: "18:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-003",
+    advisorName: "Kaushik Raval",
+    dayOfWeek: 3,
+    startTime: "09:00",
+    endTime: "18:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-004",
+    advisorName: "Kaushik Raval",
+    dayOfWeek: 4,
+    startTime: "09:00",
+    endTime: "18:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-005",
+    advisorName: "Kaushik Raval",
+    dayOfWeek: 5,
+    startTime: "09:00",
+    endTime: "17:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-006",
+    advisorName: "Rohit Verma",
+    dayOfWeek: 1,
+    startTime: "10:00",
+    endTime: "17:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-007",
+    advisorName: "Rohit Verma",
+    dayOfWeek: 3,
+    startTime: "10:00",
+    endTime: "17:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-008",
+    advisorName: "Rohit Verma",
+    dayOfWeek: 5,
+    startTime: "10:00",
+    endTime: "16:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-009",
+    advisorName: "Nisha Patel",
+    dayOfWeek: 2,
+    startTime: "10:00",
+    endTime: "17:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+  {
+    id: "oh-010",
+    advisorName: "Nisha Patel",
+    dayOfWeek: 4,
+    startTime: "10:00",
+    endTime: "17:00",
+    timezone: "Asia/Kolkata",
+    isActive: true,
+  },
+];
+
+/** Team members / advisors. */
+export const teamMembers: TeamMember[] = [
+  {
+    id: "tm-001",
+    name: "Kaushik Raval",
+    role: "ADMIN",
+    email: "kaushik@futurefina.in",
+    phoneE164: "+919876543200",
+    serviceCategories: ["MUTUAL_FUNDS", "INSURANCE", "LOANS", "ITR", "SUPPORT"],
+    languages: ["GUJARATI", "HINDI", "ENGLISH"],
+    isActive: true,
+  },
+  {
+    id: "tm-002",
+    name: "Rohit Verma",
+    role: "ADVISOR",
+    email: "rohit@futurefina.in",
+    phoneE164: "+919876543201",
+    serviceCategories: ["STOCKS_DEMAT", "INSURANCE", "LOANS"],
+    languages: ["HINDI", "ENGLISH", "GUJARATI"],
+    isActive: true,
+  },
+  {
+    id: "tm-003",
+    name: "Nisha Patel",
+    role: "ADVISOR",
+    email: "nisha@futurefina.in",
+    phoneE164: "+919876543202",
+    serviceCategories: ["ITR", "SUPPORT", "MUTUAL_FUNDS"],
+    languages: ["GUJARATI", "HINDI", "ENGLISH"],
+    isActive: true,
+  },
+];
+
+/** Configuration change audit trail. */
+export const configAuditEntries: ConfigAuditEntry[] = [
+  {
+    id: "audit-001",
+    changedBy: "Kaushik Raval",
+    changedByRole: "ADMIN",
+    section: "ITR_PRICING",
+    action: "UPDATE",
+    targetId: "itr-001",
+    targetName: "Salary Only ITR fee",
+    previousValue: "₹1,000",
+    newValue: "₹1,200",
+    changedAt: "2026-11-08T10:15:00+05:30",
+  },
+  {
+    id: "audit-002",
+    changedBy: "Kaushik Raval",
+    changedByRole: "ADMIN",
+    section: "PARTNER_LINKS",
+    action: "CREATE",
+    targetId: "partner-003",
+    targetName: "HDFC ERGO Health Insurance",
+    previousValue: null,
+    newValue: "https://hdfcergo.com/health-insurance",
+    changedAt: "2026-11-07T09:30:00+05:30",
+  },
+  {
+    id: "audit-003",
+    changedBy: "Nisha Patel",
+    changedByRole: "ADVISOR",
+    section: "FAQ",
+    action: "UPDATE",
+    targetId: "faq-002",
+    targetName: "SIP minimum amount FAQ",
+    previousValue: "₹1,000 per month",
+    newValue: "₹500 per month",
+    changedAt: "2026-11-06T14:10:00+05:30",
+  },
+];
+
+export function getItrPricingTiers(): ItrPricingTier[] {
+  return [...itrPricingTiers].sort((a, b) => a.indicativeFee - b.indicativeFee);
+}
+
+export function getFaqEntries(): FaqEntry[] {
+  return [...faqEntries].sort((a, b) => a.category.localeCompare(b.category));
+}
+
+export function getPartnerLinks(): PartnerLink[] {
+  return [...partnerLinks].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function getOfficeHours(): OfficeHours[] {
+  return [...officeHours].sort(
+    (a, b) =>
+      a.advisorName.localeCompare(b.advisorName) || a.dayOfWeek - b.dayOfWeek,
+  );
+}
+
+export function getTeamMembers(): TeamMember[] {
+  return [...teamMembers].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function getConfigAuditEntries(): ConfigAuditEntry[] {
+  return [...configAuditEntries].sort(
+    (a, b) => new Date(b.changedAt).getTime() - new Date(a.changedAt).getTime(),
+  );
 }
