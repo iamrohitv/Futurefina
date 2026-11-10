@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function InboxPage() {
   return (
     <AppShell>
-      <div className="space-y-6">
+      <div className="flex h-full flex-col gap-6">
         <PageHeader
           eyebrow="Workspace"
           title="Inbox"
