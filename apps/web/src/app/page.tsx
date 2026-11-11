@@ -39,7 +39,7 @@ export default function OverviewPage() {
 
   return (
     <AppShell>
-      <div className="flex h-full flex-col gap-6">
+      <div className="flex flex-col gap-4">
         <PageHeader
           eyebrow={formatDateLong(MOCK_NOW)}
           title="Dashboard"
