@@ -22,9 +22,12 @@ export function Sparkline({
 
   const points = data.map((value, index) => {
     const x =
-      padding + (index / Math.max(data.length - 1, 1)) * (width - padding * 2);
+      padding +
+      (index / Math.max(data.length - 1, 1)) * (width - padding * 2);
     const y =
-      height - padding - ((value - minimum) / range) * (height - padding * 2);
+      height -
+      padding -
+      ((value - minimum) / range) * (height - padding * 2);
 
     return [x, y] as const;
   });
@@ -58,6 +61,19 @@ export function Sparkline({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+      {data.length <= 7 && (
+        points.map(([x, y], index) => (
+          <circle
+            key={index}
+            cx={x}
+            cy={y}
+            r={2}
+            fill="white"
+            stroke={stroke}
+            strokeWidth={2}
+          />
+        ))
+      )}
       <circle cx={lastPoint[0]} cy={lastPoint[1]} r={2.5} fill={stroke} />
     </svg>
   );

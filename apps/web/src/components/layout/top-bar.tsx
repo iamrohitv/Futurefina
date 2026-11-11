@@ -1,6 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Bell, Calendar, ChevronDown, Maximize, Search } from "lucide-react";
+import {
+  Bell,
+  Calendar,
+  ChevronDown,
+  Maximize,
+  Search,
+} from "lucide-react";
 import { BrandMark } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,12 +21,12 @@ export function TopBar() {
         >
           <BrandMark size="sm" />
         </Link>
-        <div className="text-lg font-semibold tracking-tight text-white">
+        <div className="text-lg font-semibold text-white tracking-tight">
           Dashboard
         </div>
       </div>
 
-      <div className="relative max-w-[560px] flex-1">
+      <div className="relative flex-1 max-w-[560px]">
         <Search
           aria-hidden="true"
           className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-text-tertiary"
@@ -41,7 +46,7 @@ export function TopBar() {
         <Button
           variant="outline"
           size="icon"
-          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          className="h-9 size-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
           aria-label="Expand view"
         >
           <Maximize className="size-4" aria-hidden="true" />
@@ -49,7 +54,7 @@ export function TopBar() {
         <Button
           variant="outline"
           size="icon"
-          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          className="h-9 size-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
           aria-label="Calendar"
         >
           <Calendar className="size-4" aria-hidden="true" />
@@ -57,7 +62,7 @@ export function TopBar() {
         <Button
           variant="outline"
           size="icon"
-          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          className="h-9 size-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
           aria-label="Notifications: 2 urgent handovers"
         >
           <Bell className="size-4" aria-hidden="true" />
@@ -66,17 +71,13 @@ export function TopBar() {
         <Button
           variant="outline"
           size="icon"
-          className="size-9 h-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
+          className="h-9 size-9 rounded-full text-text-secondary hover:bg-pill hover:text-white"
           aria-label="Wade Warren — Admin profile"
         >
-          <Image
-            className="rounded-full"
-            src="https://i.pravatar.cc/100?img=11"
-            alt="Wade Warren"
-            width={32}
-            height={32}
-          />
-          <ChevronDown className="ml-1 size-3 text-text-tertiary" />
+          <span className="grid h-7 w-7 items-center justify-center rounded-full bg-green font-mono text-[10px] font-semibold text-black ring-2 ring-green/40">
+            WR
+          </span>
+          <ChevronDown className="size-3 text-text-tertiary ml-1" />
         </Button>
       </div>
     </header>

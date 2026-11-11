@@ -14,7 +14,10 @@ export function PipelineChart({ points }: PipelineChartProps) {
     (_, index) => upperBound - index * step,
   );
 
-  const totalNewLeads = points.reduce((sum, point) => sum + point.newLeads, 0);
+  const totalNewLeads = points.reduce(
+    (sum, point) => sum + point.newLeads,
+    0,
+  );
   const totalQualified = points.reduce(
     (sum, point) => sum + point.qualified,
     0,
@@ -56,9 +59,8 @@ export function PipelineChart({ points }: PipelineChartProps) {
               ))}
             </div>
 
-            <div className="absolute inset-0 flex items-end justify-between gap-1 sm:gap-3">
+            <div className="absolute inset-0 flex items-end justify-between gap-3">
               {points.map((point, index) => {
-                const isLast = index === points.length - 1;
                 const height = (point.newLeads / upperBound) * 100;
                 const qualifiedShare =
                   point.newLeads === 0
@@ -73,10 +75,10 @@ export function PipelineChart({ points }: PipelineChartProps) {
                     <div
                       role="img"
                       aria-label={`${point.label}: ${point.newLeads} new leads, ${point.qualified} qualified${point.projected ? ", projected" : ""}`}
-                      className="bg-chart-track relative w-full max-w-9 rounded-md"
+                      className="relative w-full max-w-8 rounded-md bg-chart-track"
                       style={{ height: `${height}%` }}
                     >
-                      {isLast ? (
+                      {index === points.length - 1 ? (
                         <span className="absolute -top-5 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white px-1.5 py-0.5 font-mono text-[9px] font-semibold text-black shadow-lg">
                           {point.newLeads}
                         </span>
@@ -91,13 +93,18 @@ export function PipelineChart({ points }: PipelineChartProps) {
                         />
                       </div>
                     </div>
+                    <span
+                      className="absolute -top-2 left-1/2 -translate-x-1/2 text-[10px] font-semibold text-text-tertiary"
+                    >
+                      {point.newLeads}
+                    </span>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="mt-3 flex justify-between gap-1.5 sm:gap-3">
+          <div className="mt-3 flex justify-between gap-1 sm:gap-3">
             {points.map((point, index) => (
               <span
                 key={point.label}
@@ -117,7 +124,7 @@ export function PipelineChart({ points }: PipelineChartProps) {
 
       <div className="mt-6 flex flex-wrap items-center gap-6 text-[10px] text-text-tertiary">
         <div className="flex items-center gap-2">
-          <span className="bg-chart-track h-2 w-2 rounded-full" />
+          <span className="h-2 w-2 rounded-full bg-chart-track" />
           <span className="font-mono tabular-nums">New leads</span>
         </div>
         <div className="flex items-center gap-2">

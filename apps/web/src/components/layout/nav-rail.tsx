@@ -75,7 +75,7 @@ export function NavRail() {
           <Link
             href="/"
             aria-label="Futurefina CRM — Overview"
-            className="flex items-center gap-2 rounded-xl focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none"
+            className="flex items-center gap-2 rounded-xl focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none transition-transform duration-150"
           >
             <BrandMark />
             <span className="text-sm font-bold tracking-tight text-white">Futurefina</span>
@@ -84,7 +84,7 @@ export function NavRail() {
 
         <nav aria-label="Primary" className="mt-6 px-3">
           {NAV_SECTIONS.map((section, sIdx) => (
-            <div key={section.label} className="mb-4">
+            <div key={`section-${sIdx}`} className="mb-4">
               <h3 className="mb-2 px-2 text-[10px] font-semibold tracking-wider text-text-tertiary uppercase">
                 {section.label}
               </h3>
@@ -104,7 +104,7 @@ export function NavRail() {
                             : item.label
                         }
                         className={cn(
-                          "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors",
+                          "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors duration-150",
                           active
                             ? "bg-white text-black"
                             : "text-text-secondary hover:bg-pill hover:text-white",
@@ -132,7 +132,7 @@ export function NavRail() {
               <button
                 type="button"
                 aria-label="Help and support"
-                className="flex h-9 w-9 items-center justify-center rounded-xl text-text-secondary transition-colors hover:bg-pill hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-xl text-text-secondary transition-colors duration-150 hover:bg-pill hover:text-white"
               >
                 <LifeBuoy className="size-4" strokeWidth={2} />
               </button>
@@ -147,10 +147,10 @@ export function NavRail() {
               <Link
                 href="/settings"
                 aria-label="Wade Warren — Admin"
-                className="flex items-center gap-2 rounded-full px-2 py-1.5 text-white hover:bg-pill"
+                className="flex items-center gap-2 rounded-full px-2 py-1.5 text-white hover:bg-pill transition-transform duration-150"
               >
                 <div className="relative">
-                  <span className="relative grid h-7 w-7 items-center justify-center rounded-full bg-green font-mono text-[10px] font-semibold text-black ring-2 ring-green/40">
+                  <span className="grid h-7 w-7 items-center justify-center rounded-full bg-green font-mono text-[10px] font-semibold text-black ring-2 ring-green/40">
                     {getInitials("Wade Warren")}
                   </span>
                   <span className="absolute right-0 bottom-0 size-2 rounded-full bg-green ring-2 ring-canvas" />
@@ -190,7 +190,7 @@ export function NavRail() {
                       : item.label
                   }
                   className={cn(
-                    "relative flex min-h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-green focus-visible:outline-none focus-visible:ring-inset",
+                    "relative flex min-h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-green focus-visible:outline-none focus-visible:ring-inset",
                     active ? "text-green" : "text-text-tertiary",
                   )}
                 >

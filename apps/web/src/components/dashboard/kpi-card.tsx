@@ -33,7 +33,11 @@ interface KpiCardProps {
   tone?: KpiTone;
 }
 
-export function KpiCard({ metric, icon: Icon, tone = "green" }: KpiCardProps) {
+export function KpiCard({
+  metric,
+  icon: Icon,
+  tone = "green",
+}: KpiCardProps) {
   const toneStyles = TONE_STYLES[tone];
   const TrendIcon = metric.deltaPercent >= 0 ? TrendingUp : TrendingDown;
   const isImprovement = metric.isImprovement;
@@ -48,10 +52,10 @@ export function KpiCard({ metric, icon: Icon, tone = "green" }: KpiCardProps) {
       <div className="px-6 pt-6">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold tracking-[0.14em] text-text-tertiary uppercase">
+            <p className="text-[10px] font-semibold tracking-[0.14em] uppercase text-text-tertiary">
               {metric.label}
             </p>
-            <p className="mt-1 font-heading text-2xl font-bold tracking-tight text-white tabular-nums">
+            <p className="mt-1 font-heading text-2xl font-bold tracking-tight tabular-nums text-white">
               {metric.displayValue}
             </p>
             <p className="mt-1 text-[10px] font-medium text-text-tertiary">
@@ -60,7 +64,7 @@ export function KpiCard({ metric, icon: Icon, tone = "green" }: KpiCardProps) {
           </div>
           <span
             className={cn(
-              "grid size-10 shrink-0 place-items-center rounded-xl",
+              "grid size-10 shrink-0 place-center rounded-xl",
               toneStyles.icon,
             )}
           >
@@ -74,7 +78,7 @@ export function KpiCard({ metric, icon: Icon, tone = "green" }: KpiCardProps) {
               "inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-mono text-[10px] font-medium",
               isImprovement
                 ? "bg-green/10 text-green"
-                : "bg-[#451a1a] text-[#f43f5e]",
+                : "bg-[#451a1a] text-[#ef4444]",
             )}
           >
             <TrendIcon aria-hidden="true" className="size-3" />

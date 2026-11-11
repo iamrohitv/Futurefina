@@ -15,7 +15,7 @@
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
     monospace;
 
-  /* Obsidian-Green semantic aliases */
+  /* Obsidian-Green semantic aliases (dark-mode calibrated per refactoring-ui + theming-dark-mode) */
   --color-canvas: var(--surface-canvas);
   --color-surface: var(--surface-card);
   --color-pill: var(--surface-pill-muted);
@@ -61,7 +61,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* 4px grid, 16px cards, full pills */
+  /* 4px grid (refactoring-ui spacing scale) */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -70,7 +70,7 @@
   --radius-3xl: 1.5rem;
   --radius-4xl: 9999px;
 
-  /* Custom easing curves (emil-design-eng) */
+  /* Custom easing curves (emil-design-eng - never built-in easings) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
@@ -79,30 +79,30 @@
 :root {
   color-scheme: dark;
 
-  /* Obsidian-Green palette — dark canvas with emerald accents */
-  --surface-canvas: #0a0a0a;
-  --surface-card: #141414;
-  --surface-pill-muted: #1e1e1e;
-  --surface-hatch-pattern: #222222;
-  --border-subtle: #1a1a1a;
+  /* Obsidian-Green palette (theming-dark-mode: dark grays not pure black, tinted grays) */
+  --surface-canvas: #0f172a;
+  --surface-card: #1e293b;
+  --surface-pill-muted: #334155;
+  --surface-hatch-pattern: #334155;
+  --border-subtle: #334155;
   --accent-green: #22c55e;
   --accent-green-hover: #16a34a;
-  --accent-green-subtle: #14532d;
-  --surface-inverted: #ffffff;
+  --accent-green-subtle: #064e3b;
+  --surface-inverted: #f8fafc;
   --btn-primary-bg: #ffffff;
-  --btn-primary-fg: #0a0a0a;
+  --btn-primary-fg: #0f172a;
   --tooltip-badge-bg: #ffffff;
   --accent-blue: #3b82f6;
   --accent-coral: #f472b6;
   --accent-peach: #fb923c;
   --accent-purple: #a855f7;
   --accent-amber: #fbbf24;
-  --chart-track: #2a2a2a;
+  --chart-track: #334155;
 
-  /* Text ramp — AA verified against canvas and card surfaces */
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #71717a;
+  /* Text ramp - AA verified, off-white not pure white (theming-dark-mode) */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
 
   /* Semantic state colors */
   --state-improvement-bg: var(--accent-green-subtle);
@@ -122,7 +122,7 @@
   );
   --state-degradation-inverted-fg: #b42318;
   --state-neutral-inverted-bg: #f2f4f7;
-  --state-neutral-inverted-fg: #0a0a0a;
+  --state-neutral-inverted-fg: #0f172a;
 
   /* shadcn/ui tokens */
   --background: var(--surface-canvas);
@@ -139,9 +139,9 @@
   --muted-foreground: var(--text-secondary);
   --accent: var(--accent-green-subtle);
   --accent-foreground: var(--accent-green);
-  --destructive: #f43f5e;
+  --destructive: #ef4444;
   --border: var(--border-subtle);
-  --input: #2a2a2a;
+  --input: #334155;
   --ring: var(--accent-green);
   --chart-1: var(--accent-green);
   --chart-2: var(--accent-blue);
@@ -203,17 +203,17 @@
   }
 }
 
-/* Lead lifecycle pills */
+/* Lead lifecycle pills - exact tokens from DESIGN_GUIDELINES.md section 2.3 */
 [data-lead-status="NEW"] {
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background-color: #1e293b;
+  color: #f8fafc;
 }
 [data-lead-status="QUALIFICATION_IN_PROGRESS"] {
-  background-color: #1f2937;
+  background-color: #1e293b;
   color: #3b82f6;
 }
 [data-lead-status="QUALIFIED"] {
-  background-color: #14532d;
+  background-color: #064e3b;
   color: #22c55e;
 }
 [data-lead-status="ASSIGNED"] {
@@ -229,20 +229,20 @@
   color: #fb923c;
 }
 [data-lead-status="CONVERTED"] {
-  background-color: #14532d;
+  background-color: #064e3b;
   color: #34d399;
 }
 [data-lead-status="NOT_INTERESTED"] {
-  background-color: #1f2937;
-  color: #71717a;
+  background-color: #1e293b;
+  color: #94a3b8;
 }
 [data-lead-status="CLOSED"] {
-  background-color: #0a0a0a;
-  color: #71717a;
+  background-color: #0f172a;
+  color: #94a3b8;
 }
 [data-lead-status="ESCALATED_COMPLAINT"] {
   background-color: #451a1a;
-  color: #f43f5e;
+  color: #ef4444;
 }
 
 @utility bg-hatch {
@@ -271,10 +271,10 @@
 
 @utility scrollbar-slim {
   scrollbar-width: thin;
-  scrollbar-color: #2a2a2a transparent;
+  scrollbar-color: #334155 transparent;
 }
 
-/* Premium Obsidian-Green custom scrollbar */
+/* Premium Obsidian-Green custom scrollbar (WebKit) */
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -285,7 +285,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #2a2a2a;
+  background-color: #334155;
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: padding-box;
@@ -296,16 +296,16 @@
 }
 
 .scrollable-area {
-  scrollbar-color: #2a2a2a transparent;
+  scrollbar-color: #334155 transparent;
 }
 
 .scrollable-area::-webkit-scrollbar-track {
-  background: #141414;
+  background: #1e293b;
   border-radius: 9999px;
 }
 
 .scrollable-area::-webkit-scrollbar-thumb {
-  background-color: #2a2a2a;
+  background-color: #334155;
 }
 
 .scrollable-area::-webkit-scrollbar-thumb:hover {
@@ -314,5 +314,5 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2a2a2a transparent;
+  scrollbar-color: #334155 transparent;
 }
